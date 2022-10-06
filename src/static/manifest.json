@@ -3,10 +3,11 @@
   "name": "Chrome Extension with React & Webpack",
   "description": "A chrome extension boilerplate built with React 17, Webpack 5, and Webpack Dev Server 4",
   "options_page": "options.html",
-  "background": { "service_worker": "background.bundle.js" },
+  "version": "1.0.0",
+  "background": { "service_worker": "background.js" },
   "action": {
     "default_popup": "popup.html",
-    "default_icon": "icon-34.png"
+    "default_icon": "icon-32.png"
   },
   "chrome_url_overrides": {
     "newtab": "newtab.html"
@@ -20,8 +21,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*", "<all_urls>"],
-      "js": ["contentscript.js"],
-      "css": ["content.css"]
+      "js": ["contentscript.js"]
     }
   ],
   "devtools_page": "devtools.html",
