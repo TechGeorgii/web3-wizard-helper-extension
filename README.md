@@ -59,3 +59,10 @@ To load the extension in chrome
 4. Select the **dist** folder from the cloned repository.
 
 And that's it! Happy coding...😎
+
+## ✏️ Resources
+
+- [React documentation](https://reactjs.org/docs/getting-started.html)
+- [Typescript documentation](https://www.typescriptlang.org/docs/)
+- [Chrome Extension documentation](https://developer.chrome.com/docs/extensions/mv3/)
+- [Webpack documentation](https://webpack.js.org/concepts/)
