@@ -1,15 +1,15 @@
 # Chrome Extension Boilerplate with React, TypeScript and Webpack
 
 <p>
-<img src="https://img.shields.io/badge/Version-1.0.0-orange.svg?cacheSeconds=2592000" />
+<img src="https://img.shields.io/badge/version-1.0.0-orange.svg?cacheSeconds=2592000" />
   <a href="https://github.com/harshal-limaye/chrome-extension-boilerplate-react-typescript#readme">
-    <img alt="documented" src="https://img.shields.io/badge/Documented-yes-blue.svg" target="_blank" />
+    <img alt="documented" src="https://img.shields.io/badge/vocumented-yes-blue.svg" target="_blank" />
   </a>
   <a href="https://github.com/harshal-limaye/chrome-extension-boilerplate-react-typescript/graphs/commit-activity">
-    <img alt="Updated" src="https://img.shields.io/badge/Updated-yes-green.svg" target="_blank" />
+    <img alt="Updated" src="https://img.shields.io/badge/updated-yes-green.svg" target="_blank" />
   </a>
   <a href="https://github.com/harshal-limaye/chrome-extension-boilerplate-react-typescript/LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
+    <img alt="license: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
   </a>
 </p>
 This repository aims to provide a simple and lightweight boilerplate project for writing chrome extensions using React and TypeScript.
@@ -48,3 +48,14 @@ Use following command to create a production ready build.
 ```
 npm run build
 ```
+
+## 🔌Loading extension in Chrome
+
+To load the extension in chrome
+
+1. Navigate to `chrome://extensions/`
+2. Turn on **Developer Mode** using option located on top right hand side corner of page.
+3. Click on **Load unpacked** button. This will open file browser.
+4. Select the **dist** folder from the cloned repository.
+
+And that's it! Happy coding...😎
