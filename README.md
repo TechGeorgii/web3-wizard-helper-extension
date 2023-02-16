@@ -66,3 +66,5 @@ And that's it! Happy coding...😎
 - [Typescript documentation](https://www.typescriptlang.org/docs/)
 - [Chrome Extension documentation](https://developer.chrome.com/docs/extensions/mv3/)
 - [Webpack documentation](https://webpack.js.org/concepts/)
+
+

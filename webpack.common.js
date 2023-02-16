@@ -14,6 +14,7 @@ module.exports = {
   entry: {
     background: path.resolve('src/scripts/background/index.ts'),
     contentscript: path.resolve('src/scripts/content/index.ts'),
+    injectedscript: path.resolve('src/scripts/injected/index.ts'),
     devtools: path.resolve('src/pages/devtools/index.ts'),
     newtab: path.resolve('src/pages/newtab/index.tsx'),
     options: path.resolve('src/pages/options/index.tsx'),
@@ -24,7 +25,7 @@ module.exports = {
     rules: [
       {
         use: 'ts-loader',
-        test: /\.(tsx|.ts)?$/,
+        test: /\.(tsx|ts)?$/,
         exclude: /node_modules/,
       },
       {

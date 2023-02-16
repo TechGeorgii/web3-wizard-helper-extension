@@ -1,0 +1,13 @@
+.duneHelperEnbBtn {
+    background-color: #e1e1f9;
+    border-radius: 5px;
+    padding: 5px;
+    color: #383180;
+}
+
+.duneHelperDisBtn {
+    border-radius: 5px;
+    padding: 5px;
+    color: #82877e;
+    cursor: not-allowed;
+}
