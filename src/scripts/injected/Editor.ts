@@ -1,4 +1,5 @@
 import { logger } from "../common/logger";
+import { parser } from "./parser";
 
 class Editor {
     private ace: any;
@@ -10,7 +11,7 @@ class Editor {
     getSelectedLexem(): string {
         let pos = this.ace.getCursorPosition();
         let line = this.ace.session.getLine(pos.row);
-        let lexem = this.findLexem(line, pos.column);
+        let lexem = parser.findLexem(line, pos.column);
 
         return lexem;
     }
@@ -43,22 +44,6 @@ class Editor {
             evt: "lexemChanged",
             lexem: this.getSelectedLexem()
         });
-    }
-
-    private findLexem(str: string, idx: number): string {
-        let start = idx;
-        let end = idx;
-        const regex = /[a-zA-Z0-9_\.]/;
-
-        while (start >= 0 && regex.test(str[start])) {
-            start--;
-        }
-
-        while (end < str.length && regex.test(str[end])) {
-            end++;
-        }
-
-        return str.slice(start + 1, end);
     }
 }
 
