@@ -24,6 +24,12 @@ class Editor {
             logger.log("editor found");
             this.ace = ((window as any).ace as any).edit("code");
 
+            // this.ace.commands.addCommand({
+            //     name: "schema",
+            //     exec: () => alert("command"),
+            //     bindKey: { win: "ctrl-s", mac: "cmd-s" }
+            // });
+
             this.ace.session.selection.on('change', () => {
                 this.emitLexemChangedEvt();
             });

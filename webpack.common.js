@@ -16,8 +16,6 @@ module.exports = {
     background: path.resolve('src/scripts/background/index.ts'),
     contentscript: path.resolve('src/scripts/content/index.ts'),
     injectedscript: path.resolve('src/scripts/injected/index.ts'),
-    devtools: path.resolve('src/pages/devtools/index.ts'),
-    newtab: path.resolve('src/pages/newtab/index.tsx'),
     options: path.resolve('src/pages/options/index.tsx'),
     panel: path.resolve('src/pages/panel/index.tsx'),
     popup: path.resolve('src/pages/popup/index.tsx'),
