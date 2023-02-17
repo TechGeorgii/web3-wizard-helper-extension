@@ -1,4 +1,4 @@
-import { FindDecodedTableDetail, FindTableDetail } from "./TableOperation";
+import { FindDecodedTableDetail, FindTableDetail, FindOperation } from "./TableOperation";
 
 class Parser {
     rawTablesMap: Map<string, Set<string>>;
@@ -14,7 +14,7 @@ class Parser {
         ]);
 
         for (let tbl of commonEthChains)
-            this.rawTablesMap.set(tbl, new Set(commonEthChains));
+            this.rawTablesMap.set(tbl, new Set(ethCommonTables));
     }
 
     findLexem(str: string, idx: number): string {
@@ -33,7 +33,7 @@ class Parser {
         return str.slice(start + 1, end);
     }
 
-    parseLexem(lexem: string): FindTableDetail | FindDecodedTableDetail | null {
+    parseLexem(lexem: string): FindOperation | null {
         // sanity checks =====================================
         const dotSplitted = lexem.split('.');
         if (dotSplitted.length != 2)    // table must contain strictly two parts
@@ -54,7 +54,7 @@ class Parser {
         if (set != null) {
             // raw or spell like 'arbitrum.contracts_submitted'
 
-            let res = new FindTableDetail();
+            let res = new FindTableDetail(lexem);
             res.blockchain = dotSplitted[0].toLowerCase();
             res.namespace = res.blockchain;
 
@@ -76,7 +76,7 @@ class Parser {
 
 
         const returnDetail = () => {
-            let res = new FindTableDetail();
+            let res = new FindTableDetail(lexem);
             res.blockchain = blockchain;
             res.category = "abstraction";
             res.namespace = namespace;
@@ -92,7 +92,7 @@ class Parser {
             var tok = rightSplitted[i].toLowerCase();
             if (["evt", "call"].includes(tok)) {
                 // this is a detail table
-                let decoded = new FindDecodedTableDetail();
+                let decoded = new FindDecodedTableDetail(lexem);
                 decoded.blockchain = blockchain;
                 decoded.namespace = namespace;
                 decoded.contractName = rightSplitted.slice(0, i).join("_");

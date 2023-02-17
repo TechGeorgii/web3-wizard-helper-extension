@@ -5,7 +5,7 @@ export async function executeGraphQl(body: string): Promise<any> {
     await ensureTokenUpdated();
 
     const tokenData = (window as any).DuneHelperExtTokenData;
-    return fetch("https://core-hsr.dune.com/v1/graphql", {
+    const resp = await fetch("https://core-hsr.dune.com/v1/graphql", {
         "headers": {
             "accept": "*/*",
             "authorization": `Bearer ${tokenData.token}`,
@@ -21,14 +21,12 @@ export async function executeGraphQl(body: string): Promise<any> {
         "method": "POST",
         "mode": "cors",
         "credentials": "include"
-    })
-        .then(resp => resp.json());
+    });
+    return resp.json();
 }
 
 async function ensureTokenUpdated(): Promise<void> {
     let needTokenUpdate: boolean;
-
-    debugger;
     let tokenData = (window as any).DuneHelperExtTokenData;
     if (typeof tokenData !== "undefined") {
         var decoded = jwt_decode((window as any).DuneHelperExtTokenData.token);

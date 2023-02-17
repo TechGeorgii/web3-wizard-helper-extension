@@ -19,15 +19,19 @@ const decoded = [
 ];
 
 const raw = [
-    ["ethereum.traces", { ns: "ethereum", bc: "ethereum", tn: "traces" }],
-    ["polygon.transactions", { ns: "polygon", bc: "polygon", tn: "transactions" }],
-    ["optimism_legacy_ovm1.traces", { ns: "optimism_legacy_ovm1", bc: "optimism_legacy_ovm1", tn: "traces" }]
+    ["ethereum.traces", { ns: "ethereum", bc: "ethereum", tn: "traces", cat: "canonical" }],
+    ["polygon.transactions", { ns: "polygon", bc: "polygon", tn: "transactions", cat: "canonical" }],
+    ["optimism_legacy_ovm1.traces", { ns: "optimism_legacy_ovm1", bc: "optimism_legacy_ovm1", tn: "traces", cat: "canonical" }]
 ];
 
 const spells = [
-    ["blur_ethereum.mints", { ns: "blur", bc: "ethereum", tn: "mints" }],
-    ["aave_v2_ethereum.interest", { ns: "aave_v2", bc: "ethereum", tn: "interest" }],
-    ["arbitrum.contracts_submitted", { ns: "arbitrum", bc: "arbitrum", tn: "contracts_submitted" }]
+    ["blur_ethereum.mints", { ns: "blur", bc: "ethereum", tn: "mints", cat: "abstraction" }],
+    ["aave_v2_ethereum.interest", { ns: "aave_v2", bc: "ethereum", tn: "interest", cat: "abstraction" }],
+    ["arbitrum.contracts_submitted", { ns: "arbitrum", bc: "arbitrum", tn: "contracts_submitted", cat: "abstraction" }]
+];
+
+const errors = [
+    "", "..", "a..b", "a.", ".b", "a", "_a.b", "a.b_", "a__b.b", "a.b__b", "a.b"
 ];
 
 test("Test decoded tables (positive)", () => {
@@ -49,7 +53,7 @@ test("Test decoded tables (positive)", () => {
 test("Test raw and spell tables (positive)", () => {
     for (let tc of [...raw, ...spells]) {
         const lex = tc[0] as string;
-        const exp = tc[1] as { ns: string, bc: string, tn: string };
+        const exp = tc[1] as { ns: string, bc: string, tn: string, cat: string };
         const res = parser.parseLexem(lex);
         expect(res).toBeInstanceOf(FindTableDetail);
 
@@ -57,5 +61,13 @@ test("Test raw and spell tables (positive)", () => {
         expect(typed.namespace).toBe(exp.ns);
         expect(typed.blockchain).toBe(exp.bc);
         expect(typed.tableName).toBe(exp.tn);
+        expect(typed.category).toBe(exp.cat);
+    }
+});
+
+test("Test errors", () => {
+    for (let lex of errors) {
+        const actual = parser.parseLexem(lex);
+        expect(actual).toBeNull();
     }
 });

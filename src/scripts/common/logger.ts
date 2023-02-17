@@ -8,6 +8,11 @@ class Logger {
         if (message != null)
             console.error("Dune helper: " + message)
     }
+
+    info(message?: any) {
+        if (message != null)
+            console.info("Dune helper (info): " + message)
+    }
 }
 
 const logger = new Logger();

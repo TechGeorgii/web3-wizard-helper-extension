@@ -1,8 +1,11 @@
 import { logger } from "../common/logger";
 import { parser } from "./parser";
 
+type LexemChangedListenerType = ((editor: Editor, lexem: string) => void);
+
 class Editor {
     private ace: any;
+    private lexemChangedListener: null | LexemChangedListenerType = null;
 
     constructor() {
         this.init();
@@ -39,15 +42,18 @@ class Editor {
         }
     }
 
+    setListener(func: LexemChangedListenerType) {
+        this.lexemChangedListener = func;
+    }
+
+    voidListener() {
+        this.lexemChangedListener = null;
+    }
+
     private emitLexemChangedEvt() {
-        window.postMessage({
-            evt: "lexemChanged",
-            lexem: this.getSelectedLexem()
-        });
+        if (this.lexemChangedListener != null)
+            this.lexemChangedListener(this, this.getSelectedLexem());
     }
 }
-
-// executeGraphQl("{\"operationName\":\"FindDecodedTableDetail\",\"variables\":{\"namespace\":\"uniswap_v3\",\"contract_name\":\"Pair\",\"abi\":\"Flash\",\"blockchains_filter\":{\"_eq\":[\"ethereum\"]},\"dataset_id\":11},\"query\":\"query FindDecodedTableDetail($namespace: String!, $contract_name: String!, $abi: String!, $blockchains_filter: jsonb_comparison_exp!, $dataset_id: Int!) {\\n  arrakis_schemas(\\n    where: {category: {_eq: \\\"decoded_project\\\"}, namespace: {_eq: $namespace}, contract_name: {_eq: $contract_name}, abi_name: {_eq: $abi}, blockchains: $blockchains_filter, dataset_id: {_eq: $dataset_id}}\\n  ) {\\n    id\\n    abi_type\\n    table_name\\n    column_name\\n    data_type\\n    full_name\\n    blockchains\\n    __typename\\n  }\\n}\\n\"}")
-//     .then(data => console.log(data));
 
 export { Editor }
