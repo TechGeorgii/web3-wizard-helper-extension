@@ -13,6 +13,6 @@ function injectScript() {
 injectScript();
 
 const toolbar = new CommandToolbar();
-toolbar.addCommand("Schema", "schema")
-toolbar.addCommand("Data", "sampleData")
-toolbar.initAndAttachButtons()
+toolbar.addCommand("Schema", "schema");
+toolbar.addCommand("Preview", "preview");
+toolbar.initAndAttachButtons();

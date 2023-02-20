@@ -1,13 +1,19 @@
+import { logger } from "../common/logger";
+import { SVGIcons } from "./icons";
+
 class CommandButton {
     private btn: HTMLButtonElement;
     private enabled: boolean = false;
 
     constructor(toolbar: Element, text: string, command: string) {
         this.btn = document.createElement("button");
-        this.btn.textContent = text;
-        this.btn.className = "duneHelperDisBtn";
+        this.btn.title = text;
+        this.btn.disabled = true;
+        this.btn.className = "duneHelperTbBtn";
+        this.btn.innerHTML = SVGIcons[command];
+
         this.btn.onclick = () => {
-            if (this.enabled) {
+            if (!this.btn.disabled) {
                 window.postMessage({ evt: "cmd", command: command });
             }
         };
@@ -17,8 +23,7 @@ class CommandButton {
             if (event.source !== window || event.data.evt !== "lexemChanged") {
                 return;
             }
-            this.enabled = !(event.data.lexem == null || event.data.lexem == "");
-            this.btn.className = this.enabled ? "duneHelperEnbBtn" : "duneHelperDisBtn";
+            this.btn.disabled = (event.data.lexem == null || event.data.lexem == "");
         });
     }
 }

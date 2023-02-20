@@ -1,4 +1,4 @@
-.duneHelperEnbBtn {
+/* .duneHelperEnbBtn {
     background-color: #e1e1f9;
     border-radius: 5px;
     padding: 5px;
@@ -10,4 +10,43 @@
     padding: 5px;
     color: #82877e;
     cursor: not-allowed;
+} */
+
+.duneHelperTbBtn {
+    /* #1d1d20 */
+    color: var(--link--tertiary--default);
+    background-color: #34373c;
+    padding: .8rem;
+    border-radius: .8rem;
+    height: 32px;
+}
+
+.duneHelperTbBtn:hover {
+    background: var(--cta--tertiary--hover);
+    color: var(--link--tertiary--hover);
+}
+
+.duneHelperTbBtn:hover::after {
+    content: attr(title);
+    background-color: #292b2d;
+    color: #e8e9eb;
+    font-size: 14px;
+    padding: 0.3em;
+    position: absolute;
+    z-index: 1;
+    transform: translate(-32px, -40px);
+    border-radius: .8rem;
+    font: "IBM Plex Sans";
+}
+
+.duneHelperTbBtn:hover:disabled::after {
+    color: gray;
+}
+
+.duneHelperTbBtn:disabled {
+    color: gray;
+}
+
+.duneHelperTbBtn:disabled:hover {
+    background-color: #34373c;
 }

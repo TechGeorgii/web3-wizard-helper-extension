@@ -12,13 +12,20 @@ class CommandToolbar {
     }
 
     initAndAttachButtons() {
-        const paramsForm = document.querySelector("div > main > div > section > div > div > section > div > form");
+        const toolbarList = document.querySelector("#__next > div > main > div > section > div > div > section> div > div > div > div > div > ul");
+        //        const paramsForm = document.querySelector("div > main > div > section > div > div > section > div > form");
 
-        if (paramsForm) {
+        if (toolbarList && toolbarList.parentElement) {
             logger.log("toolbar found!");
 
+            const parentDiv = toolbarList.parentElement;
+            const helperToolbarDiv = document.createElement("div");
+            helperToolbarDiv.style.setProperty("flex-grow", "1");
+            helperToolbarDiv.style.setProperty("margin-left", "40px");
+            parentDiv.insertAdjacentElement("afterend", helperToolbarDiv);
+
             for (let cmd of this.commands) {
-                this.buttons.push(new CommandButton(paramsForm, cmd[0], cmd[1]));
+                this.buttons.push(new CommandButton(helperToolbarDiv, cmd[0], cmd[1]));
             }
             logger.log(`${this.commands} buttons were added`)
         } else {
