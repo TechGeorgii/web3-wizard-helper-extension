@@ -13,6 +13,6 @@ function injectScript() {
 injectScript();
 
 const toolbar = new CommandToolbar();
-toolbar.addCommand("Schema", "schema");
-toolbar.addCommand("Preview", "preview");
+toolbar.addCommand("Schema (ctrl-s)", "schema");
+toolbar.addCommand("Preview (ctrl-p)", "preview");
 toolbar.initAndAttachButtons();

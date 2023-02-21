@@ -1,5 +1,4 @@
 import { logger } from "../common/logger";
-import { SVGIcons } from "./icons";
 
 class CommandButton {
     private btn: HTMLButtonElement;
@@ -10,7 +9,11 @@ class CommandButton {
         this.btn.title = text;
         this.btn.disabled = true;
         this.btn.className = "duneHelperTbBtn";
-        this.btn.innerHTML = SVGIcons[command];
+        const svgURL = chrome.runtime.getURL(`icons/${command}.svg`);
+
+        fetch(svgURL)
+            .then((response) => response.text())
+            .then((svgCode) => this.btn.innerHTML = svgCode);
 
         this.btn.onclick = () => {
             if (!this.btn.disabled) {

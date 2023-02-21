@@ -13,7 +13,6 @@ class CommandToolbar {
 
     initAndAttachButtons() {
         const toolbarList = document.querySelector("#__next > div > main > div > section > div > div > section> div > div > div > div > div > ul");
-        //        const paramsForm = document.querySelector("div > main > div > section > div > div > section > div > form");
 
         if (toolbarList && toolbarList.parentElement) {
             logger.log("toolbar found!");

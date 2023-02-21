@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Dune Analytics Helper",
-  "description": "Dune Analytics Helper",
+  "name": "Web3 Wizard Helper",
+  "description": "Extension to simplify querying and data hacking on Dune Analytics",
   "options_page": "options.html",
   "version": "1.0.0",
   "background": {
@@ -34,9 +34,11 @@
     {
       "resources": [
         "content.styles.css",
+        "popup.css",
         "icon-128.png",
-        "icon-34.png",
-        "injectedscript.js"
+        "icon-32.png",
+        "injectedscript.js",
+        "icons/*.svg"
       ],
       "matches": [
         "https://dune.com/*"

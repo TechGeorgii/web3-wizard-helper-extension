@@ -24,11 +24,21 @@ class Editor {
             logger.log("editor found");
             this.ace = ((window as any).ace as any).edit("code");
 
-            // this.ace.commands.addCommand({
-            //     name: "schema",
-            //     exec: () => alert("command"),
-            //     bindKey: { win: "ctrl-s", mac: "cmd-s" }
-            // });
+            this.ace.commands.addCommand({
+                name: "schema",
+                exec: () => {
+                    window.postMessage({ evt: "cmd", command: "schema" });
+                },
+                bindKey: { win: "ctrl-s", mac: "cmd-s" }
+            });
+
+            this.ace.commands.addCommand({
+                name: "preview",
+                exec: () => {
+                    window.postMessage({ evt: "cmd", command: "preview" });
+                },
+                bindKey: { win: "ctrl-p", mac: "cmd-p" }
+            });
 
             this.ace.session.selection.on('change', () => {
                 this.emitLexemChangedEvt();
