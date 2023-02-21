@@ -5,6 +5,7 @@ import { Mutex, MutexInterface } from 'async-mutex';
 
 class DataProvider {
     private dataMap = new Map<string, any>();
+    private activeOperations = new Set<string>();
     private mutex = new Mutex();
 
     async getData(operation: FindOperation): Promise<any> {
@@ -18,6 +19,11 @@ class DataProvider {
                 logger.info(`cache hit: ${key}`);
                 return Promise.resolve(cached);
             }
+            if (this.activeOperations.has(key))
+                return Promise.reject("operation is in queue");
+
+            this.activeOperations.add(key);
+
             logger.info(`cache miss: ${key}`);
         }
         finally {
@@ -33,6 +39,7 @@ class DataProvider {
 
             release = await this.mutex.acquire();
             this.dataMap.set(key, data);
+            this.activeOperations.delete(key);
 
             logger.info(`cache updated for ${key}`);
         }

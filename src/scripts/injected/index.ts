@@ -25,7 +25,9 @@ window.addEventListener("message", (event) => {
                 if (operation == null)
                     logger.error(`'${lex}' is not a Dune table`);
                 else {
-                    dataProvider.getData(operation).then((data) => console.log(data));
+                    dataProvider.getData(operation)
+                        .then((data) => logger.log(data))
+                        .catch((err) => logger.error(err));
                 }
                 break;
             default:

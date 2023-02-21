@@ -1,17 +1,17 @@
 class Logger {
     log(message?: any) {
         if (message != null)
-            console.log("Dune helper: " + message)
+            console.log("Dune helper: ", message)
     }
 
     error(message?: any) {
         if (message != null)
-            console.error("Dune helper: " + message)
+            console.error("Dune helper: ", message)
     }
 
     info(message?: any) {
         if (message != null)
-            console.info("Dune helper (info): " + message)
+            console.info("Dune helper (info): ", message)
     }
 }
 
