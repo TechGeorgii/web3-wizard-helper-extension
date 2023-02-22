@@ -14,7 +14,7 @@ const getHtmlPlugins = (filenames) =>
 module.exports = {
   entry: {
     background: path.resolve('src/scripts/background/index.ts'),
-    contentscript: path.resolve('src/scripts/content/index.ts'),
+    contentscript: path.resolve('src/scripts/content/index.tsx'),
     injectedscript: path.resolve('src/scripts/injected/index.ts'),
     options: path.resolve('src/pages/options/index.tsx'),
     panel: path.resolve('src/pages/panel/index.tsx'),
@@ -59,8 +59,7 @@ module.exports = {
     path: path.resolve('dist'),
   },
   optimization: {
-    splitChunks: {
-      chunks: 'all'
-    },
+    // This is to disable chunks completely
+    splitChunks: false
   },
 };

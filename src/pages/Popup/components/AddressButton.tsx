@@ -1,4 +1,5 @@
 import React from 'react';
+import "../../../static/popup.css"
 
 class AddressButton extends React.Component<{ address: string }> {
     render() {

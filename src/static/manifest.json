@@ -20,7 +20,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://dune.com/queries/*"
+        "https://dune.com/queries/*",
+        "https://blank.org/*"
       ],
       "js": [
         "contentscript.js"
@@ -33,15 +34,14 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "content.styles.css",
-        "popup.css",
         "icon-128.png",
         "icon-32.png",
         "injectedscript.js",
         "icons/*.svg"
       ],
       "matches": [
-        "https://dune.com/*"
+        "https://dune.com/*",
+        "https://blank.org/*"
       ]
     }
   ]

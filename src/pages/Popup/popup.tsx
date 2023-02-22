@@ -1,6 +1,7 @@
 import { useState } from "react";
 import React from 'react';
 import AddressButton from './components/AddressButton'
+import "../../static/popup.css"
 
 const Popup: React.FC<{}> = () => {
 

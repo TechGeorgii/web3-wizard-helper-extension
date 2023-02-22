@@ -1,0 +1,15 @@
+.draggableDiv {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    z-index: 100000;
+    position: relative;
+    border: 1px solid gray;
+    border-radius: 0.1em;
+}
+
+.windowHeader {
+    cursor: move;
+    background-color: gray;
+    height: 20px;
+}
