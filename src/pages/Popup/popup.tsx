@@ -1,10 +1,10 @@
 import { useState } from "react";
 import React from 'react';
+import AddressButton from './components/AddressButton'
 
 const Popup: React.FC<{}> = () => {
 
   const [supportAuthorMode, setSupportAuthorMode] = useState(false);
-  const copyText = "Copy address to clipboard";
 
   return (
     <>
@@ -30,12 +30,16 @@ const Popup: React.FC<{}> = () => {
         supportAuthorMode && (
           <>
             If Web3 Wizard Helper saves your time, please consider donation
+
+
             <br /><br />
-            • BTC – <button onClick={() => navigator.clipboard.writeText("bc1qq0pz6m0uz0wjyw62x4tperqg5shdm4mz6y85gx")} className="copyBtn" title={copyText}><img src="icons/copy.svg" /></button>
+            • BTC – <AddressButton address="bc1qq0pz6m0uz0wjyw62x4tperqg5shdm4mz6y85gx" />
+
             <br />
-            • ERC20 – <button onClick={() => navigator.clipboard.writeText("0x8866e8533209e4366F2A3bBbCc6f5f479b96cA10")} className="copyBtn" title={copyText}><img src="icons/copy.svg" /></button>
+            • ERC20 – <AddressButton address="0x8866e8533209e4366F2A3bBbCc6f5f479b96cA10" />
+
             <br />
-            • TRC20 – <button onClick={() => navigator.clipboard.writeText("TE2SYJ2ka2mezzeQf6suvQkE2P5X7NAoja")} className="copyBtn" title={copyText}><img src="icons/copy.svg" /></button>
+            • TRC20 – <AddressButton address="TE2SYJ2ka2mezzeQf6suvQkE2P5X7NAoja" />
 
             <br />
             <br />
