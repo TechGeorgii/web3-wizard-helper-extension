@@ -26,7 +26,14 @@ window.addEventListener("message", (event) => {
                     logger.error(`'${lex}' is not a Dune table`);
                 else {
                     dataProvider.getData(operation)
-                        .then((data) => logger.log(data))
+                        .then((data) => {
+                            logger.log(data);
+                            window.postMessage({
+                                evt: "schemaReceived",
+                                rawData: data,
+                                tableName: lex
+                            });
+                        })
                         .catch((err) => logger.error(err));
                 }
                 break;
