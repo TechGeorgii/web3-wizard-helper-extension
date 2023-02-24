@@ -27,7 +27,8 @@ const raw = [
 const spells = [
     ["blur_ethereum.mints", { ns: "blur", bc: "ethereum", tn: "mints", cat: "abstraction" }],
     ["aave_v2_ethereum.interest", { ns: "aave_v2", bc: "ethereum", tn: "interest", cat: "abstraction" }],
-    ["arbitrum.contracts_submitted", { ns: "arbitrum", bc: "arbitrum", tn: "contracts_submitted", cat: "abstraction" }]
+    ["arbitrum.contracts_submitted", { ns: "arbitrum", bc: "arbitrum", tn: "contracts_submitted", cat: "abstraction" }],
+    //["prices.usd", {ns: "prices", bc: }] – all blockchains going here. TODO – 
 ];
 
 const errors = [

@@ -1,13 +1,6 @@
 .windowHeader {
-    cursor: move;
     background-color: #f2f2f2;
     height: 20px;
-}
-
-.contentDiv {
-    width: 100%;
-    height: calc(100% - 40px);
-    overflow: auto;
 }
 
 .closeBtn {
@@ -16,10 +9,17 @@
 }
 
 .react-resizable {
+    left: 100px;
+    top: 100px;
     background-color: white;
-    position: relative;
+    /* position: relative; */
+    position: absolute;
+    left: 100px;
+    top: 100px;
+
     border: 1px solid gray;
     z-index: 100000;
+    cursor: move;
 }
 
 .react-resizable-handle {
@@ -36,4 +36,29 @@
     background-origin: content-box;
     box-sizing: border-box;
     cursor: se-resize;
+}
+
+.contentDiv {
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow: auto;
+}
+
+.schemaUL {
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid;
+    margin-left: 2.6rem;
+    margin-right: 0.6rem;
+    padding-left: .5rem;
+    font-size: 13px;
+}
+
+.tableh3 {
+    display: inline-flex;
+    align-items: center;
+    grid-gap: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 10px;
 }

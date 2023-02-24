@@ -1,22 +1,3 @@
-.tableh3 {
-    display: inline-flex;
-    align-items: center;
-    grid-gap: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    margin: 10px;
-}
-
-.schemaUL {
-    display: flex;
-    flex-direction: column;
-    border-left: 1px solid;
-    margin-left: 2.6rem;
-    margin-right: 0.6rem;
-    padding-left: .5rem;
-    font-size: 13px;
-}
-
 .schemaLI {
     display: flex;
     align-items: center;

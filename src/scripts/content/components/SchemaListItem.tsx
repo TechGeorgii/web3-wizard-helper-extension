@@ -1,7 +1,7 @@
 import React from 'react';
 import { DuneTableColumn } from "../../common/DuneTable";
 
-import "../../../static/schemaTable.css"
+import "./SchemaListItem.css"
 
 class SchemaListItem extends React.Component<{ column: DuneTableColumn }> {
     render() {
