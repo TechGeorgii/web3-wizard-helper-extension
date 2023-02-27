@@ -5,7 +5,7 @@ class Parser {
 
     constructor() {
         const ethCommonTables = ["blocks", "creation_traces", "logs", "traces", "transactions"];
-        const commonEthChains = ["arbitrum", "ethereum", "gnosis", "polygon", "optimism", "optimism_legacy_ovm1", "bnb", "fantom"];
+        const commonEthChains = ["arbitrum", "avalanche_c", "bnb", "ethereum", "fantom", "gnosis", "optimism", "optimism_legacy_ovm1", "polygon"];
 
         this.rawTablesMap = new Map([
             ["solana", new Set(["account_activity", "blocks", "rewards", "transactions", "vote_transactions"])],
@@ -64,8 +64,15 @@ class Parser {
             return res;
         }
 
-        if (leftSplitted.length == 1)   // one component and not in blockchain list
-            return null;    // something wrong
+        if (leftSplitted.length == 1) { // one component and not in blockchain list
+            // it is spell like prices.usd, dao.proposals, gas.fees that contain column 'blockchain' in them.
+
+            const res = new FindTableDetail(lexem);
+            res.category = "abstraction";
+            res.namespace = dotSplitted[0];
+            res.tableName = dotSplitted[1];
+            return res;
+        }
 
         const blockchain = leftSplitted[leftSplitted.length - 1].toLowerCase();
         if (!this.rawTablesMap.has(blockchain)) // this must be always a blockchain

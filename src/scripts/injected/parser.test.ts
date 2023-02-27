@@ -28,11 +28,18 @@ const spells = [
     ["blur_ethereum.mints", { ns: "blur", bc: "ethereum", tn: "mints", cat: "abstraction" }],
     ["aave_v2_ethereum.interest", { ns: "aave_v2", bc: "ethereum", tn: "interest", cat: "abstraction" }],
     ["arbitrum.contracts_submitted", { ns: "arbitrum", bc: "arbitrum", tn: "contracts_submitted", cat: "abstraction" }],
-    //["prices.usd", {ns: "prices", bc: }] – all blockchains going here. TODO – 
+];
+
+// Have 'blockchain' column in them and doesn't have blockchain name in name.
+const spells_no_blockchain = [
+    ["prices.usd", { ns: "prices", bc: "", tn: "usd", cat: "abstraction" }],
+    ["gas.fees", { ns: "gas", bc: "", tn: "fees", cat: "abstraction" }],
+    ["labels.balancer_v2_pools_arbitrum", { ns: "labels", bc: "", tn: "balancer_v2_pools_arbitrum", cat: "abstraction" }],
+    ["labels.arbitrage_traders", { ns: "labels", bc: "", tn: "arbitrage_traders", cat: "abstraction" }],
 ];
 
 const errors = [
-    "", "..", "a..b", "a.", ".b", "a", "_a.b", "a.b_", "a__b.b", "a.b__b", "a.b"
+    "", "..", "a..b", "a.", ".b", "a", "_a.b", "a.b_", "a__b.b", "a.b__b"
 ];
 
 test("Test decoded tables (positive)", () => {
@@ -52,7 +59,7 @@ test("Test decoded tables (positive)", () => {
 });
 
 test("Test raw and spell tables (positive)", () => {
-    for (let tc of [...raw, ...spells]) {
+    for (let tc of [...raw, ...spells, ...spells_no_blockchain]) {
         const lex = tc[0] as string;
         const exp = tc[1] as { ns: string, bc: string, tn: string, cat: string };
         const res = parser.parseLexem(lex);
