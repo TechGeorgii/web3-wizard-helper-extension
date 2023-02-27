@@ -9,13 +9,24 @@ function App() {
     const [duneTable, setDuneTable] = useState<DuneTable | null>(null);
 
     const handleMessage = (event: any) => {
-        if (event.source !== window || event.data.evt !== "schemaReceived"
-            || !event.data.rawData
-            || !event.data.tableName) {
+        if (event.source !== window)
             return;
+
+
+        switch (event.data.evt) {
+            case "schemaReceived":
+                if (event.data.rawData && event.data.tableName) {
+                    const duneTable = new DuneTable(event.data.tableName, event.data.rawData);
+                    setDuneTable(duneTable);
+                }
+                break;
+
+            case "lexemChanged":
+                if (toolbar.current != null)
+                    toolbar.current.lexemButtonsEnabled = !(event.data.lexem == null || event.data.lexem == "");
+                break;
         }
-        const duneTable = new DuneTable(event.data.tableName, event.data.rawData);
-        setDuneTable(duneTable);
+
     };
 
     const initToolbar = function () {

@@ -21,7 +21,6 @@ class Editor {
 
     private init() {
         if ((window as any).ace != null && document.querySelector("#code")) {
-            logger.log("editor found");
             this.ace = ((window as any).ace as any).edit("code");
 
             this.ace.commands.addCommand({
@@ -51,11 +50,31 @@ class Editor {
             this.ace.session.selection.on('changeCursor', () => {
                 this.emitLexemChangedEvt();
             });
+
+            logger.log("editor found and initialized");
+            this.checkLost();
         }
         else {
             logger.log("editor not found. Retrying in 1 second.");
             setTimeout(() => this.init(), 1000);
         }
+    }
+
+    checkLost() {
+        if ((window as any).ace != null && document.querySelector("#code")) {
+            if (this.ace != null) {
+                const newEditor = ((window as any).ace as any).edit("code");
+                if (newEditor.id != this.ace.id) {
+                    logger.info("editor was recreated. Rebounding.");
+                    this.init();
+                    return;
+                }
+            }
+        } else {
+            logger.log("editor lost. Trying to find it again");
+        }
+
+        setTimeout(() => this.checkLost(), 1000);
     }
 
     setListener(func: LexemChangedListenerType) {

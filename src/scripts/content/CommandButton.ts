@@ -2,7 +2,6 @@ import { logger } from "../common/logger";
 
 class CommandButton {
     private btn: HTMLButtonElement;
-    private enabled: boolean = false;
 
     constructor(toolbar: Element, text: string, command: string) {
         this.btn = document.createElement("button");
@@ -21,13 +20,10 @@ class CommandButton {
             }
         };
         toolbar.appendChild(this.btn);
+    }
 
-        window.addEventListener("message", (event) => {
-            if (event.source !== window || event.data.evt !== "lexemChanged") {
-                return;
-            }
-            this.btn.disabled = (event.data.lexem == null || event.data.lexem == "");
-        });
+    set enabled(en: boolean) {
+        this.btn.disabled = !en;
     }
 }
 
