@@ -1,0 +1,32 @@
+.tablePreviewHover {
+    max-width: min(calc(100vw - 34rem), 120rem);
+    height: calc(100% - 40px);
+    width: 100%;
+    overflow: auto;
+}
+
+.headerPreview {
+    display: -moz-box;
+    padding: 0.5em;
+    -moz-box-align: start;
+}
+
+.aPreview {
+    margin: 0;
+    padding: 0;
+    padding: 0.5rem;
+}
+
+.previewHeaderBtn {
+    cursor: pointer;
+}
+
+.previewTable {
+    white-space: nowrap;
+}
+
+td,
+th {
+    padding-left: 8px;
+    padding-right: 8px;
+}

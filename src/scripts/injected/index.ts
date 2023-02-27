@@ -37,6 +37,11 @@ window.addEventListener("message", (event) => {
                         .catch((err) => logger.error(err));
                 }
                 break;
+
+            case "preview":
+                window.postMessage({ evt: "previewReceived" });
+                break;
+
             default:
                 logger.error(`command ${event.data.command} is not supported`);
         }
