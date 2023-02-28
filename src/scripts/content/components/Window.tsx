@@ -5,12 +5,16 @@ import "./Window.css"
 
 function Window(props: {
     maxConstraints?: [number, number];
+    height?: number;
+    width?: number;
     onClose: () => void;
-    children?: React.ReactNode
+    children?: React.ReactNode;
+    cancel?: string;
 }) {
     return (
-        <Draggable cancel='.react-resizable-handle'>
-            <ResizableBox width={200} height={200} minConstraints={[100, 100]} maxConstraints={props.maxConstraints ?? [600, 600]}>
+        // cancel – append what's passed here to window handle
+        <Draggable cancel={".react-resizable-handle" + ((props.cancel ?? "").length != 0 ? "," + props.cancel : "")}>
+            <ResizableBox width={props.width ?? 200} height={props.height ?? 200} minConstraints={[100, 100]} maxConstraints={props.maxConstraints ?? [600, 600]}>
                 <>
                     <div className='windowHeader' >
                         <button className="closeBtn" onClick={props.onClose}>[x]</button>

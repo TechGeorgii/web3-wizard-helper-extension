@@ -7,29 +7,24 @@ function PreviewWindow(props: { onClose: () => void }) {
     const { onClose } = props;
 
     return (
-        <Window onClose={onClose} maxConstraints={[1200, 1200]}>
+        <Window onClose={onClose} cancel=".previewTable,.headerPreview" maxConstraints={[1200, 1200]} height={330} width={550}>
             <div className='tablePreviewHover'>
-
                 <header className="headerPreview">
-                    <div>
-                        <div>
-                            <a className="aPreview" href="#"><span>Table preview</span><span>arbitrum.blocks</span></a>
-                        </div>
-                    </div>
+                    <span className='tablePreviewSpan'>Table preview</span>
+                    <span>arbitrum.blocks</span>
                 </header>
 
-                {/* visual result */}
                 <div>
                     <table className='previewTable'>
                         <thead>
                             <tr>
-                                <th><button type="button" title="Toggle SortBy" className='previewHeaderBtn'><div>time</div></button></th>
-                                <th><button type="button" title="Toggle SortBy" className='previewHeaderBtn'><div>time</div></button></th>
-                                <th><button type="button" title="Toggle SortBy" className='previewHeaderBtn'><div>time</div></button></th>
-                                <th><button type="button" title="Toggle SortBy" className='previewHeaderBtn'><div>time</div></button></th>
-                                <th><button type="button" title="Toggle SortBy" className='previewHeaderBtn'><div>time</div></button></th>
-                                <th><button type="button" title="Toggle SortBy" className='previewHeaderBtn'><div>time</div></button></th>
-                                <th><button type="button" title="Toggle SortBy" className='previewHeaderBtn'><div>time</div></button></th>
+                                <th>time</th>
+                                <th>time</th>
+                                <th>time</th>
+                                <th>time</th>
+                                <th>time</th>
+                                <th>time</th>
+                                <th>time</th>
                             </tr>
                         </thead>
 
@@ -100,6 +95,8 @@ function PreviewWindow(props: { onClose: () => void }) {
                         </tbody>
                     </table>
                 </div>
+
+                <div className='rowsCntDiv'>10 rows</div>
             </div>
         </Window>
     );

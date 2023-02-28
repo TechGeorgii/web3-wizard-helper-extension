@@ -6,27 +6,47 @@
 }
 
 .headerPreview {
-    display: -moz-box;
+    display: inline-flex;
+    align-items: center;
     padding: 0.5em;
-    -moz-box-align: start;
+    cursor: auto;
 }
 
-.aPreview {
-    margin: 0;
-    padding: 0;
-    padding: 0.5rem;
-}
-
-.previewHeaderBtn {
-    cursor: pointer;
+.tablePreviewSpan {
+    font-weight: 500;
+    margin-right: 10px;
+    width: max-content;
 }
 
 .previewTable {
+    cursor: auto;
     white-space: nowrap;
+    font-family: IBM Plex Mono;
+    font-size: 1.2rem;
 }
 
 td,
 th {
     padding-left: 8px;
     padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+th {
+    background-color: #ffeceb;
+    font-weight: 500;
+}
+
+tr {
+    border-bottom: 1px solid #ffeceb;
+}
+
+.rowsCntDiv {
+    padding: 4px;
+    background-color: #ffeceb;
+    width: fit-content;
+    margin: 10px;
+    font-size: 1.2rem !important;
+    font-family: IBM Plex Mono !important;
 }
