@@ -1,5 +1,4 @@
 .tablePreviewHover {
-    max-width: min(calc(100vw - 34rem), 120rem);
     height: calc(100% - 40px);
     width: 100%;
     overflow: auto;
