@@ -1,5 +1,5 @@
 import { parser } from "./parser";
-import { FindDecodedTableDetail, FindTableDetail } from "./TableOperation";
+import { FindDecodedTableDetail, FindTableDetail } from "./TableOperations";
 
 const decoded = [
     ["aavegotchi_polygon.aavegotchi_diamond_call_aavegotchiClaimTime",

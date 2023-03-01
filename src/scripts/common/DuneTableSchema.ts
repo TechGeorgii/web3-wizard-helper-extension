@@ -5,7 +5,7 @@ interface DuneTableColumn {
 }
 
 
-class DuneTable {
+class DuneTableSchema {
     tableName: string;
     columns: DuneTableColumn[];
 
@@ -16,5 +16,4 @@ class DuneTable {
     }
 }
 
-export default DuneTable;
-export { DuneTableColumn };
+export { DuneTableSchema, DuneTableColumn };

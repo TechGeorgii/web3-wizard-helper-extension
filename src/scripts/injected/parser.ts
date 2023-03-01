@@ -1,4 +1,4 @@
-import { FindDecodedTableDetail, FindTableDetail, FindOperation } from "./TableOperation";
+import { FindDecodedTableDetail, FindTableDetail } from "./TableOperations";
 
 class Parser {
     rawTablesMap: Map<string, Set<string>>;
@@ -33,7 +33,7 @@ class Parser {
         return str.slice(start + 1, end);
     }
 
-    parseLexem(lexem: string): FindOperation | null {
+    parseLexem(lexem: string): FindTableDetail | FindDecodedTableDetail | null {
         // sanity checks =====================================
         const dotSplitted = lexem.split('.');
         if (dotSplitted.length != 2)    // table must contain strictly two parts
@@ -80,7 +80,6 @@ class Parser {
 
         leftSplitted.pop(); // remove blockchain
         const namespace = leftSplitted.join("_");
-
 
         const returnDetail = () => {
             let res = new FindTableDetail(lexem);

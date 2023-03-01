@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CommandToolbar } from "../CommandToolbar";
 import TableSchemaWindow from "./TableSchemaWindow";
-import DuneTable from "../../common/DuneTable";
+import { DuneTableSchema } from "../../common/DuneTableSchema";
+import { DuneTablePreview } from "../../common/DuneTablePreview";
 import PreviewWindow from "./PreviewWindow";
+import { logger } from "../../common/logger";
 
 function App() {
     const toolbar = useRef<CommandToolbar>(new CommandToolbar());
 
-    const [duneTable, setDuneTable] = useState<DuneTable | null>(null);
-    const [showPreview, setShowPreview] = useState(false);
+    const [tableSchema, setTableSchema] = useState<DuneTableSchema | null>(null);
+    const [tablePreview, setTablePreview] = useState<DuneTablePreview | null>(null);
 
     const handleMessage = (event: any) => {
         if (event.source !== window)
@@ -18,13 +20,16 @@ function App() {
         switch (event.data.evt) {
             case "schemaReceived":
                 if (event.data.rawData && event.data.tableName) {
-                    const duneTable = new DuneTable(event.data.tableName, event.data.rawData);
-                    setDuneTable(duneTable);
+                    const duneTable = new DuneTableSchema(event.data.tableName, event.data.rawData);
+                    setTableSchema(duneTable);
                 }
                 break;
 
             case "previewReceived":
-                setShowPreview(true);
+                if (event.data.tableName && event.data.rawData) {
+                    const preview = new DuneTablePreview(event.data.tableName, event.data.rawData);
+                    setTablePreview(preview);
+                }
                 break;
 
             case "lexemChanged":
@@ -52,8 +57,8 @@ function App() {
 
     return (
         <>
-            {duneTable && <TableSchemaWindow table={duneTable} onClose={() => setDuneTable(null)} />}
-            {showPreview && <PreviewWindow onClose={() => setShowPreview(false)} />}
+            {tableSchema && <TableSchemaWindow table={tableSchema} onClose={() => setTableSchema(null)} />}
+            {tablePreview && <PreviewWindow columns={tablePreview.columns} data={tablePreview.data} onClose={() => setTablePreview(null)} />}
         </>
     );
 }

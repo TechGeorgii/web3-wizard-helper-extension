@@ -3,8 +3,8 @@ import Window from './Window';
 
 import "./PreviewWindow.css"
 
-function PreviewWindow(props: { onClose: () => void }) {
-    const { onClose } = props;
+function PreviewWindow(props: { onClose: () => void, columns: string[], data: any }) {
+    const { onClose, columns, data } = props;
 
     return (
         <Window onClose={onClose} cancel=".previewTable,.headerPreview" maxConstraints={[1200, 1200]} height={330} width={550}>
@@ -18,80 +18,20 @@ function PreviewWindow(props: { onClose: () => void }) {
                     <table className='previewTable'>
                         <thead>
                             <tr>
-                                <th>time</th>
-                                <th>time</th>
-                                <th>time</th>
-                                <th>time</th>
-                                <th>time</th>
-                                <th>time</th>
-                                <th>time</th>
+                                {columns.map(col => <th key={col}>{col}</th>)}
                             </tr>
                         </thead>
-
                         <tbody>
-                            <tr>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>Hello</div></td>
-                                <td role="cell"><div>World</div></td>
-                            </tr>
-                            <tr>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>Hello</div></td>
-                                <td role="cell"><div>World</div></td>
-                            </tr>
-                            <tr>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>Hello</div></td>
-                                <td role="cell"><div>World</div></td>
-                            </tr>
-                            <tr>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>Hello</div></td>
-                                <td role="cell"><div>World</div></td>
-                            </tr>
-                            <tr>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>Hello</div></td>
-                                <td role="cell"><div>World</div></td>
-                            </tr>
-                            <tr>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>Hello</div></td>
-                                <td role="cell"><div>World</div></td>
-                            </tr>
-                            <tr>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>2021-07-17 03:18</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>121212</div></td>
-                                <td role="cell"><div>Hello</div></td>
-                                <td role="cell"><div>World</div></td>
-                            </tr>
+                            {Array(data.length).fill(0).map((_, i) => i).
+                                map(i =>
+                                    <tr >
+                                        {columns.map(col =>
+                                            <td key={col} role="cell">
+                                                {data[i][col]}
+                                            </td>)}
+                                    </tr>
+                                )
+                            }
                         </tbody>
                     </table>
                 </div>

@@ -2,6 +2,8 @@ import { logger } from "../common/logger";
 import { dataProvider } from "./dataProvider";
 import { Editor } from "./Editor";
 import { parser } from "./parser";
+import { GetTablePreview } from "./TableOperations"
+import { DuneTablePreview } from "../common/DuneTablePreview";
 
 const editor = new Editor();
 editor.setListener((_, lex) => {
@@ -30,6 +32,7 @@ window.addEventListener("message", (event) => {
                 dataProvider.getData(operation)
                     .then((data) => {
                         logger.log(data);
+
                         window.postMessage({
                             evt: "schemaReceived",
                             rawData: data,
@@ -41,13 +44,15 @@ window.addEventListener("message", (event) => {
                 break;
 
             case "preview":
-                dataProvider.getData(operation)
+                const tablePreviewOperation = new GetTablePreview(lex);
+
+                dataProvider.getData(tablePreviewOperation)
                     .then((data) => {
                         logger.log(data);
                         window.postMessage({
                             evt: "previewReceived",
-                            rawData: data,
-                            tableName: lex
+                            tableName: lex,
+                            rawData: data
                         });
                     })
                     .catch((err) => logger.error(err));
@@ -59,3 +64,4 @@ window.addEventListener("message", (event) => {
         }
     }
 }, false);
+

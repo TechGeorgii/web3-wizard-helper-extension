@@ -1,27 +1,30 @@
 import jwt_decode from "jwt-decode";
 import { logger } from "../common/logger";
 
-export async function executeGraphQl(body: string): Promise<any> {
+export async function executeGraphQl(body: string, getExecution = false): Promise<any> {
     await ensureTokenUpdated();
 
     const tokenData = (window as any).DuneHelperExtTokenData;
-    const resp = await fetch("https://core-hsr.dune.com/v1/graphql", {
-        "headers": {
-            "accept": "*/*",
-            "authorization": `Bearer ${tokenData.token}`,
-            "content-type": "application/json",
-            "sec-fetch-dest": "empty",
-            "sec-fetch-mode": "cors",
-            "sec-fetch-site": "same-site",
-            "x-dune-access-token": tokenData.accessToken
-        },
-        "referrer": "https://dune.com/",
-        "referrerPolicy": "strict-origin-when-cross-origin",
-        "body": body,
-        "method": "POST",
-        "mode": "cors",
-        "credentials": "include"
-    });
+    const resp = await fetch(
+        getExecution ? "https://app-api.dune.com/v1/graphql" : "https://core-hsr.dune.com/v1/graphql",
+        {
+            "headers": {
+                "accept": "*/*",
+                "authorization": `Bearer ${tokenData.token}`,
+                "content-type": "application/json",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-site",
+                "x-dune-access-token": tokenData.accessToken,
+                //"x-hasura-api-key": ""  // this is to request app-api.dune.com, but put here for generalization.
+            },
+            "referrer": "https://dune.com/",
+            "referrerPolicy": "strict-origin-when-cross-origin",
+            "body": body,
+            "method": "POST",
+            "mode": "cors",
+            "credentials": getExecution ? "same-origin" : "include"
+        });
     return resp.json();
 }
 

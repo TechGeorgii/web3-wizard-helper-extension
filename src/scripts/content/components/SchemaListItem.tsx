@@ -1,5 +1,5 @@
 import React from 'react';
-import { DuneTableColumn } from "../../common/DuneTable";
+import { DuneTableColumn } from "../../common/DuneTableSchema";
 
 import "./SchemaListItem.css"
 

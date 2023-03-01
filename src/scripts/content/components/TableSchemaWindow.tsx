@@ -1,11 +1,11 @@
 import React from 'react';
-import DuneTable from "../../common/DuneTable";
+import { DuneTableSchema } from "../../common/DuneTableSchema";
 import SchemaListItem from './SchemaListItem';
 import Window from './Window';
 
 import "./TableSchemaWindow.css"
 
-function TableSchemaWindow(props: { table: DuneTable, onClose: () => void }) {
+function TableSchemaWindow(props: { table: DuneTableSchema, onClose: () => void }) {
     const { table, onClose } = props;
 
     return (
