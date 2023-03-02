@@ -4,7 +4,7 @@ class Parser {
     rawTablesMap: Map<string, Set<string>>;
 
     constructor() {
-        const ethCommonTables = ["blocks", "creation_traces", "logs", "traces", "transactions"];
+        const ethCommonTables = ["blocks", "creation_traces", "logs", "logs_decoded", "traces", "traces_decoded", "transactions"];
         const commonEthChains = ["arbitrum", "avalanche_c", "bnb", "ethereum", "fantom", "gnosis", "optimism", "optimism_legacy_ovm1", "polygon"];
 
         this.rawTablesMap = new Map([

@@ -4,6 +4,9 @@
   "description": "Extension to simplify querying and data hacking on Dune Analytics",
   "options_page": "options.html",
   "version": "1.0.0",
+  "permissions": [
+    "storage"
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -20,8 +23,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://dune.com/queries/*",
-        "https://blank.org/*"
+        "https://dune.com/queries/*"
       ],
       "js": [
         "contentscript.js"
@@ -40,8 +42,7 @@
         "icons/*.svg"
       ],
       "matches": [
-        "https://dune.com/*",
-        "https://blank.org/*"
+        "https://dune.com/*"
       ]
     }
   ]

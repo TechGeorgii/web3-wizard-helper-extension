@@ -4,7 +4,6 @@ import TableSchemaWindow from "./TableSchemaWindow";
 import { DuneTableSchema } from "../../common/DuneTableSchema";
 import { DuneTablePreview } from "../../common/DuneTablePreview";
 import PreviewWindow from "./PreviewWindow";
-import { logger } from "../../common/logger";
 
 function App() {
     const toolbar = useRef<CommandToolbar>(new CommandToolbar());
@@ -58,7 +57,7 @@ function App() {
     return (
         <>
             {tableSchema && <TableSchemaWindow table={tableSchema} onClose={() => setTableSchema(null)} />}
-            {tablePreview && <PreviewWindow columns={tablePreview.columns} data={tablePreview.data} onClose={() => setTablePreview(null)} />}
+            {tablePreview && <PreviewWindow preview={tablePreview} onClose={() => setTablePreview(null)} />}
         </>
     );
 }

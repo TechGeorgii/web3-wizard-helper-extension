@@ -1,15 +1,25 @@
 import { useState } from "react";
 import React from 'react';
 import AddressButton from './components/AddressButton'
-import "../../static/popup.css"
+import "./popup.css"
 
-const Popup: React.FC<{}> = () => {
-
+function Popup(props: { extEnabled: boolean }) {
   const [supportAuthorMode, setSupportAuthorMode] = useState(false);
+  const [extEnabled, setExtEnabled] = useState(props.extEnabled);
+
+  const toggleExt = function () {
+    chrome.storage.local.set({ extEnabled: !extEnabled }).then(() => {
+      setExtEnabled(!extEnabled);
+    });
+  };
 
   return (
     <>
       <h3>🧙 Web3 Wizard Helper for Dune Analytics</h3>
+
+      {extEnabled && <>If you're experiencing problems – temporarily disable extension and reload Dune window. <br /><br /> </>}
+      <button onClick={toggleExt}>{extEnabled ? "Disable extension" : "Enable extension"}</button>
+      <br /><br />
 
       Cheatsheet:
       <br />

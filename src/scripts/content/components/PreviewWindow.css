@@ -1,6 +1,8 @@
 .tablePreviewHover {
     height: calc(100% - 40px);
     width: 100%;
+    display: flex;
+    flex-direction: column;
     overflow: auto;
 }
 
@@ -9,6 +11,11 @@
     align-items: center;
     padding: 0.5em;
     cursor: auto;
+}
+
+.tableContainer {
+    overflow: auto;
+    flex-grow: 1;
 }
 
 .tablePreviewSpan {
@@ -41,11 +48,26 @@ tr {
     border-bottom: 1px solid #ffeceb;
 }
 
+.tdPreview {
+    max-width: 1200px;
+    overflow: hidden;
+}
+
+.bottomDiv {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    height: 20px;
+}
+
 .rowsCntDiv {
     padding: 4px;
     background-color: #ffeceb;
     width: fit-content;
-    margin: 10px;
     font-size: 1.2rem !important;
     font-family: IBM Plex Mono !important;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }

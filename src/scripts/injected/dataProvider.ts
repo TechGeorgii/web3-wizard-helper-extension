@@ -39,7 +39,7 @@ class DataProvider {
                 const executionId = operation.getExecutionId(resExec);
                 logger.info(`executionId received for ${key}`);
 
-                const tries = 3;
+                const tries = 10;
                 for (let i = 0; i < tries; i++) {
                     await this.wait(1000);
                     logger.info(`checking for completion ${key} (${i + 1}/${tries})`);

@@ -1,14 +1,13 @@
 import React from 'react';
-import "../../../static/popup.css"
+import "./AddressButton.css"
 
-class AddressButton extends React.Component<{ address: string }> {
-    render() {
-        const { address } = this.props;
+function AddressButton(props: { address: string }) {
+    const { address } = props;
 
-        return (
-            <button onClick={() => navigator.clipboard.writeText(address)} className="copyBtn" title="Copy address to clipboard"><img src="icons/copy.svg" /></button>
-        );
-    }
+    return (
+        <button onClick={() => navigator.clipboard.writeText(address)
+        } className="copyBtn" title="Copy address to clipboard" > <img src="icons/copy.svg" /></button >
+    );
 }
 
 export default AddressButton;

@@ -2,19 +2,24 @@ import React from 'react';
 import Window from './Window';
 
 import "./PreviewWindow.css"
+import { DuneTablePreview } from '../../common/DuneTablePreview';
 
-function PreviewWindow(props: { onClose: () => void, columns: string[], data: any }) {
-    const { onClose, columns, data } = props;
+function PreviewWindow(props: { onClose: () => void, preview: DuneTablePreview }) {
+    const { onClose } = props;
+    const { columns, data, tableName } = props.preview;
 
     return (
-        <Window onClose={onClose} cancel=".previewTable,.headerPreview" maxConstraints={[1200, 1200]} height={330} width={550}>
+        <Window onClose={onClose}
+            cancel=".previewTable,.headerPreview"
+            maxConstraints={[1200, 415]} minConstraints={[230, 170]}
+            width={550} height={415} >
             <div className='tablePreviewHover'>
                 <header className="headerPreview">
                     <span className='tablePreviewSpan'>Table preview</span>
-                    <span>arbitrum.blocks</span>
+                    <span>{tableName}</span>
                 </header>
 
-                <div>
+                <div className='tableContainer'>
                     <table className='previewTable'>
                         <thead>
                             <tr>
@@ -24,9 +29,9 @@ function PreviewWindow(props: { onClose: () => void, columns: string[], data: an
                         <tbody>
                             {Array(data.length).fill(0).map((_, i) => i).
                                 map(i =>
-                                    <tr >
+                                    <tr key={i}>
                                         {columns.map(col =>
-                                            <td key={col} role="cell">
+                                            <td key={col} role="cell" className='tdPreview'>
                                                 {data[i][col]}
                                             </td>)}
                                     </tr>
@@ -36,7 +41,9 @@ function PreviewWindow(props: { onClose: () => void, columns: string[], data: an
                     </table>
                 </div>
 
-                <div className='rowsCntDiv'>10 rows</div>
+                <div className='bottomDiv'>
+                    <div className='rowsCntDiv'>10 rows</div>
+                </div>
             </div>
         </Window>
     );
