@@ -5,3 +5,16 @@
     width: 20px;
     border-radius: .2rem;
 }
+
+.copyBtn:hover::after {
+    content: attr(title);
+    background-color: #292b2d;
+    color: #e8e9eb;
+    font-size: 14px;
+    padding: 0.3em;
+    position: absolute;
+    z-index: 1;
+    transform: translate(-32px, -40px);
+    border-radius: .8rem;
+    font: "IBM Plex Sans";
+}

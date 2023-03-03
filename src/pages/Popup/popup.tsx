@@ -1,24 +1,42 @@
 import { useState } from "react";
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import AddressButton from './components/AddressButton'
 import "./popup.css"
 
 function Popup(props: { extEnabled: boolean }) {
   const [supportAuthorMode, setSupportAuthorMode] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipText, setTooltipText] = useState("text tooltip");
   const [extEnabled, setExtEnabled] = useState(props.extEnabled);
 
-  const toggleExt = function () {
+  const toggleExtClick = function (event: MouseEvent<HTMLButtonElement>) {
+    setShowTooltip(false);
+
     chrome.storage.local.set({ extEnabled: !extEnabled }).then(() => {
       setExtEnabled(!extEnabled);
     });
+
+    setShowTooltip(true);
+    setTooltipText(extEnabled ? "Extension disabled. Reload Dune pages to take effect" : "Extension enabled. Reload Dune pages to take effect")
+    setTimeout(() => {
+      setShowTooltip(false);
+    }, 4000);
   };
 
   return (
     <>
       <h3>🧙 Web3 Wizard Helper for Dune Analytics</h3>
 
-      {extEnabled && <>If you're experiencing problems – temporarily disable extension and reload Dune window. <br /><br /> </>}
-      <button onClick={toggleExt}>{extEnabled ? "Disable extension" : "Enable extension"}</button>
+      {extEnabled && <>If you're experiencing problems – temporarily disable extension and check<br /><br /> </>}
+      <button
+        onClick={toggleExtClick}>
+        {extEnabled ? "Disable extension" : "Enable extension"}
+      </button>
+
+      {showTooltip && (
+        <div className="tooltip">{tooltipText}</div>
+      )}
+
       <br /><br />
 
       Cheatsheet:
