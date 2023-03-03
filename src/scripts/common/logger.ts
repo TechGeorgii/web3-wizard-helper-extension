@@ -1,9 +1,11 @@
+declare var __PRODUCTION__: boolean;
 class Logger {
     log(message?: any) {
         if (message == null)
             return;
 
-        console.log("Dune helper: ", message);
+        if (this.isConsoleLog())
+            console.log("Dune helper: ", message);
         this.sendToBackground(message);
     }
 
@@ -11,7 +13,9 @@ class Logger {
         if (message == null)
             return;
 
-        console.error("Dune helper: ", message);
+        if (this.isConsoleLog())
+            console.error("Dune helper: ", message);
+
         this.sendToBackground(message);
     }
 
@@ -19,8 +23,15 @@ class Logger {
         if (message == null)
             return;
 
-        console.info("Dune helper (info): ", message);
+        if (this.isConsoleLog())
+            console.info("Dune helper (info): ", message);
         this.sendToBackground(message);
+    }
+
+    isConsoleLog(): boolean {
+        if (typeof __PRODUCTION__ != "undefined" && __PRODUCTION__)
+            return false;
+        return true;
     }
 
     sendToBackground(message?: any) {
