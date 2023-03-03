@@ -44,18 +44,28 @@ window.addEventListener("message", (event) => {
                 break;
 
             case "preview":
+                const sendPreviewReceived = (tableName: string, data: any = null, error = false) => {
+                    window.postMessage({
+                        evt: "previewReceived",
+                        tableName: tableName,
+                        rawData: data,
+                        error: !error ? null : error
+                    });
+                };
+
+                sendPreviewReceived(lex);
+
                 const tablePreviewOperation = new GetTablePreview(lex);
 
                 dataProvider.getData(tablePreviewOperation)
                     .then((data) => {
                         logger.log(data);
-                        window.postMessage({
-                            evt: "previewReceived",
-                            tableName: lex,
-                            rawData: data
-                        });
+                        sendPreviewReceived(lex, data);
                     })
-                    .catch((err) => logger.error(err));
+                    .catch((err) => {
+                        logger.error(err);
+                        sendPreviewReceived(lex, null, true);
+                    });
 
                 break;
 

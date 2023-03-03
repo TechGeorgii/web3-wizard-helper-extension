@@ -71,3 +71,7 @@ tr {
     bottom: 10px;
     left: 10px;
 }
+
+.messageDiv {
+    text-align: center;
+}

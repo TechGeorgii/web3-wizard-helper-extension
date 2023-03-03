@@ -6,7 +6,7 @@ import { DuneTablePreview } from '../../common/DuneTablePreview';
 
 function PreviewWindow(props: { onClose: () => void, preview: DuneTablePreview }) {
     const { onClose } = props;
-    const { columns, data, tableName } = props.preview;
+    const { columns, data, tableName, error } = props.preview;
 
     return (
         <Window onClose={onClose}
@@ -19,33 +19,39 @@ function PreviewWindow(props: { onClose: () => void, preview: DuneTablePreview }
                     <span>{tableName}</span>
                 </header>
 
-                <div className='tableContainer'>
-                    <table className='previewTable'>
-                        <thead>
-                            <tr>
-                                {columns.map(col => <th key={col}>{col}</th>)}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Array(data.length).fill(0).map((_, i) => i).
-                                map(i =>
-                                    <tr key={i}>
-                                        {columns.map(col =>
-                                            <td key={col} role="cell" className='tdPreview'>
-                                                {data[i][col]}
-                                            </td>)}
+                {columns && data &&
+                    <>
+                        <div className='tableContainer'>
+                            <table className='previewTable'>
+                                <thead>
+                                    <tr>
+                                        {columns.map(col => <th key={col}>{col}</th>)}
                                     </tr>
-                                )
-                            }
-                        </tbody>
-                    </table>
-                </div>
+                                </thead>
+                                <tbody>
+                                    {Array(data.length).fill(0).map((_, i) => i).
+                                        map(i =>
+                                            <tr key={i}>
+                                                {columns.map(col =>
+                                                    <td key={col} role="cell" className='tdPreview'>
+                                                        {data[i][col]}
+                                                    </td>)}
+                                            </tr>
+                                        )
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
 
-                <div className='bottomDiv'>
-                    <div className='rowsCntDiv'>10 rows</div>
-                </div>
+                        <div className='bottomDiv'>
+                            <div className='rowsCntDiv'>10 rows</div>
+                        </div>
+                    </>
+                }
+
+                {!(columns && data) && <div className="messageDiv">{error ? "Cannot load preview. Network error or table does not exist" : "Loading..."}</div>}
             </div>
-        </Window>
+        </Window >
     );
 }
 

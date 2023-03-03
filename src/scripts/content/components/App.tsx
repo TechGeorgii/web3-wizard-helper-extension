@@ -25,8 +25,8 @@ function App() {
                 break;
 
             case "previewReceived":
-                if (event.data.tableName && event.data.rawData) {
-                    const preview = new DuneTablePreview(event.data.tableName, event.data.rawData);
+                if (event.data.tableName) {
+                    const preview = new DuneTablePreview(event.data.tableName, event.data.rawData, event.data.error != null);
                     setTablePreview(preview);
                 }
                 break;
