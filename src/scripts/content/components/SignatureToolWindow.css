@@ -1,0 +1,37 @@
+.searchBarDiv {
+    padding: 5px;
+}
+
+.headerPreview {
+    padding: 0.5em;
+}
+
+.inputSearch {
+    border: 1px solid lightgray;
+}
+
+.searchSigButton {
+    border: 1px solid;
+    border-radius: 0.1em;
+}
+
+.signatureTableDiv {
+    cursor: auto;
+    position: absolute;
+    overflow: auto;
+    width: 100%;
+    top: 100px;
+    bottom: 60px;
+    right: 0px;
+}
+
+.signBottomPanel {
+    position: absolute;
+    bottom: 15px;
+    padding-left: 10px;
+    width: 100%;
+}
+
+.msgSignatureDiv {
+    text-align: center;
+}

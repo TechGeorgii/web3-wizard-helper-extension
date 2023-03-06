@@ -35,6 +35,8 @@ class CommandToolbar {
 
                 if (cmd[2])
                     this.lexemBoundButtons.push(btn);
+                else
+                    btn.enabled = true;
             }
             logger.log(`toolbar found! ${this.commands} buttons were added`);
             this.checkLost();

@@ -34,13 +34,15 @@ function Window(props: {
                 width={props.width ?? 200}
                 height={props.height ?? 200}
                 minConstraints={props.minConstraints ?? [100, 100]}
-                maxConstraints={props.maxConstraints ?? [600, 600]}>
+                maxConstraints={props.maxConstraints}>
                 <>
                     <div className='windowHeader' >
                         <button className="closeBtn" onClick={props.onClose}>[x]</button>
                     </div>
 
-                    {props.children}
+                    <div className='containerDivWindow'>
+                        {props.children}
+                    </div>
                 </>
             </ResizableBox >
         </Draggable >

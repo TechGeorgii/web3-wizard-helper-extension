@@ -19,7 +19,7 @@ window.addEventListener("message", (event) => {
         return;
     }
 
-    if (event.data.evt == "cmd" && event.data.command) {
+    if (event.data.evt == "cmd" && ["schema", "preview"].includes(event.data.command)) {
         const lex = editor.getSelectedLexem();
         const operation = parser.parseLexem(lex);
         if (operation == null) {

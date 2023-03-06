@@ -7,6 +7,9 @@
   "permissions": [
     "storage"
   ],
+  "host_permissions": [
+    "https://www.4byte.directory/*"
+  ],
   "background": {
     "service_worker": "background.js"
   },

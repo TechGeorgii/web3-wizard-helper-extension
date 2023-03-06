@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { CommandToolbar } from "../CommandToolbar";
-import TableSchemaWindow from "./TableSchemaWindow";
 import { DuneTableSchema } from "../../common/DuneTableSchema";
 import { DuneTablePreview } from "../../common/DuneTablePreview";
+import TableSchemaWindow from "./TableSchemaWindow";
+import SignatureToolWindow from "./SignatureToolWindow"
 import PreviewWindow from "./PreviewWindow";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
 
     const [tableSchema, setTableSchema] = useState<DuneTableSchema | null>(null);
     const [tablePreview, setTablePreview] = useState<DuneTablePreview | null>(null);
+    const [showSignatureToolWindow, setShowSignatureToolWindow] = useState(false);
 
     const handleMessage = (event: any) => {
         if (event.source !== window)
@@ -35,6 +37,12 @@ function App() {
                 if (toolbar.current != null)
                     toolbar.current.lexemButtonsEnabled = !(event.data.lexem == null || event.data.lexem == "");
                 break;
+
+            case "cmd":
+                if (event.data.command == "signature") {
+                    setShowSignatureToolWindow(true);
+                }
+                break;
         }
 
     };
@@ -42,6 +50,7 @@ function App() {
     const initToolbar = function () {
         toolbar.current.addCommand("Schema (ctrl-s)", "schema");
         toolbar.current.addCommand("Preview (ctrl-p)", "preview");
+        toolbar.current.addCommand("Signature tool", "signature", false);
         toolbar.current.initAndAttachButtons();
     };
 
@@ -58,6 +67,7 @@ function App() {
         <>
             {tableSchema && <TableSchemaWindow table={tableSchema} onClose={() => setTableSchema(null)} />}
             {tablePreview && <PreviewWindow preview={tablePreview} onClose={() => setTablePreview(null)} />}
+            {showSignatureToolWindow && <SignatureToolWindow onClose={() => setShowSignatureToolWindow(false)} />}
         </>
     );
 }

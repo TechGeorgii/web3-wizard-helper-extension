@@ -24,6 +24,11 @@
     margin-right: 5px;
 }
 
+.containerDivWindow {
+    width: 100%;
+    height: calc(100% - 40px);
+}
+
 .react-resizable {
     left: 100px;
     top: 100px;
