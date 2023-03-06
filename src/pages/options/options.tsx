@@ -8,7 +8,7 @@ const Options: React.FC<{}> = () => {
     • <a href="https://freeicons.io/profile/722" target="_blank">Fasil</a> <br />
     • <a href="https://freeicons.io/profile/5790" target="_blank">ColourCreatype</a> <br />
 
-
+    <br />
 
     All from <a href="https://freeicons.io" target="_blank">freeicons.io</a>
   </>);
