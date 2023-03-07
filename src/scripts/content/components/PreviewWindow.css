@@ -31,26 +31,26 @@
     font-size: 1.2rem;
 }
 
-td,
-th {
+.prTh {
+    background-color: #ffeceb;
+    font-weight: 500;
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 4px;
     padding-bottom: 4px;
 }
 
-th {
-    background-color: #ffeceb;
-    font-weight: 500;
-}
-
-tr {
+.previewTr {
     border-bottom: 1px solid #ffeceb;
 }
 
 .tdPreview {
     max-width: 1200px;
     overflow: hidden;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 .bottomDiv {

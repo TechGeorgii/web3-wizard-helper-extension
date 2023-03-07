@@ -24,14 +24,14 @@ function PreviewWindow(props: { onClose: () => void, preview: DuneTablePreview }
                         <div className='tableContainer'>
                             <table className='previewTable'>
                                 <thead>
-                                    <tr>
-                                        {columns.map(col => <th key={col}>{col}</th>)}
+                                    <tr className="previewTr">
+                                        {columns.map(col => <th key={col} className="prTh">{col}</th>)}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {Array(data.length).fill(0).map((_, i) => i).
                                         map(i =>
-                                            <tr key={i}>
+                                            <tr key={i} className="previewTr">
                                                 {columns.map(col =>
                                                     <td key={col} role="cell" className='tdPreview'>
                                                         {data[i][col]}

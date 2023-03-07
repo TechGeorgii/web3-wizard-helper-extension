@@ -3,6 +3,7 @@ import Window from './Window';
 import { logger } from "../../common/logger"
 
 import "./SignatureToolWindow.css"
+import "./PreviewWindow.css"    // it is a bad hack, but let's release earlier and refactor later.
 
 function SignatureToolWindow(props: { onClose: () => void }) {
     const { onClose } = props;
@@ -72,17 +73,17 @@ function SignatureToolWindow(props: { onClose: () => void }) {
                     <div className='signatureTableDiv'>
                         <table>
                             <thead>
-                                <tr>
-                                    <th>Text Signature</th>
-                                    <th>Bytes Signature</th>
+                                <tr className="previewTr">
+                                    <th className='prTh'>Text Signature</th>
+                                    <th className='prTh'>Bytes Signature</th>
                                 </tr>
                             </thead>
 
                             <tbody>
                                 {results.map(row =>
-                                    <tr key={row.id}>
-                                        <td>{row.text_signature}</td>
-                                        <td>{row.hex_signature}</td>
+                                    <tr key={row.id} className="previewTr">
+                                        <td className='tdPreview'>{row.text_signature}</td>
+                                        <td className='tdPreview'>{row.hex_signature}</td>
                                     </tr>)
                                 }
                             </tbody>
