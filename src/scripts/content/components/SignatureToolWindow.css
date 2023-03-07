@@ -8,11 +8,13 @@
 
 .inputSearch {
     border: 1px solid lightgray;
+    margin: 3px;
 }
 
 .searchSigButton {
     border: 1px solid;
-    border-radius: 0.1em;
+    border-radius: 0.2em;
+    padding: 1px;
 }
 
 .signatureTableDiv {
@@ -21,17 +23,21 @@
     overflow: auto;
     width: 100%;
     top: 100px;
-    bottom: 60px;
+    bottom: 40px;
     right: 0px;
 }
 
 .signBottomPanel {
     position: absolute;
-    bottom: 15px;
+    bottom: 5px;
     padding-left: 10px;
     width: 100%;
 }
 
 .msgSignatureDiv {
     text-align: center;
+}
+
+.pagingLink {
+    margin: 5px;
 }

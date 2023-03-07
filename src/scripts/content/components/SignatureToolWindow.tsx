@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Window from './Window';
 import { logger } from "../../common/logger"
 
@@ -10,15 +10,18 @@ function SignatureToolWindow(props: { onClose: () => void }) {
     const [loading, setLoading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
+    const [nextUrl, setNextUrl] = useState('');
+    const [prevUrl, setPrevUrl] = useState('');
+    const [curUrl, setCurUrl] = useState("");
 
-    const searchClick = function () {
+    useEffect(() => {
+        if (curUrl == "") // first load, do nothing.
+            return;
+
         setLoading(true);
         setErrorMsg('');
 
-        const params = new URLSearchParams();
-        params.append('format', 'json');
-        params.append('hex_signature', searchTerm);
-        fetch(`https://www.4byte.directory/api/v1/signatures/?${params.toString()}`, {
+        fetch(curUrl, {
             "credentials": "omit",
             "mode": "cors"
         })
@@ -30,26 +33,35 @@ function SignatureToolWindow(props: { onClose: () => void }) {
             .then(data => {
                 setLoading(false);
                 setResults(data.results);
+                setPrevUrl(data.previous ?? "");
+                setNextUrl(data.next ?? "");
             })
             .catch(error => {
                 logger.error(error);
                 setErrorMsg('Error loading signatures');
                 setLoading(false);
             });
+    }, [curUrl]);
+
+    const searchClick = function () {
+        const params = new URLSearchParams();
+        params.append('format', 'json');
+        params.append('hex_signature', searchTerm);
+        setCurUrl(`https://www.4byte.directory/api/v1/signatures/?${params.toString()}`);
     };
 
     return (
         <Window
             onClose={onClose} height={390} width={320}
             minConstraints={[270, 230]}
-            cancel=".signatureTableDiv">
+            cancel=".signatureTableDiv,.inputSearch,.searchSigButton">
 
             <header className='headerPreview'>
                 <span>Search Ethereum signature database</span>
             </header>
 
             <div className='searchBarDiv'>
-                <input className='inputSearch' type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} />
+                <input className='inputSearch' type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="0xa9059cbb" />
                 <button className='searchSigButton' onClick={searchClick}>Search</button>
             </div>
 
@@ -78,7 +90,8 @@ function SignatureToolWindow(props: { onClose: () => void }) {
                     </div>
 
                     <div className='signBottomPanel'>
-                        <a href="#">Prev</a> 1, 2, 3 <a href="#">Next</a>
+                        {prevUrl != "" && <a href="#" className='pagingLink' onClick={() => setCurUrl(prevUrl)}>Prev</a>}
+                        {nextUrl != "" && <a href="#" className='pagingLink' onClick={() => setCurUrl(nextUrl)}>Next</a>}
                     </div>
                 </>
             }
