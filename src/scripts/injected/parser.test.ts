@@ -28,6 +28,7 @@ const spells = [
     ["blur_ethereum.mints", { ns: "blur", bc: "ethereum", tn: "mints", cat: "abstraction" }],
     ["aave_v2_ethereum.interest", { ns: "aave_v2", bc: "ethereum", tn: "interest", cat: "abstraction" }],
     ["arbitrum.contracts_submitted", { ns: "arbitrum", bc: "arbitrum", tn: "contracts_submitted", cat: "abstraction" }],
+    ["tokens_optimism.erc20", { ns: "tokens", bc: "optimism", tn: "erc20", cat: "abstraction" }],
 ];
 
 // Have 'blockchain' column in them and doesn't have blockchain name in name.
@@ -36,6 +37,7 @@ const spells_no_blockchain = [
     ["gas.fees", { ns: "gas", bc: "", tn: "fees", cat: "abstraction" }],
     ["labels.balancer_v2_pools_arbitrum", { ns: "labels", bc: "", tn: "balancer_v2_pools_arbitrum", cat: "abstraction" }],
     ["labels.arbitrage_traders", { ns: "labels", bc: "", tn: "arbitrage_traders", cat: "abstraction" }],
+    ["tokens.erc20", { ns: "tokens", bc: "", tn: "erc20", cat: "abstraction" }]
 ];
 
 const errors = [

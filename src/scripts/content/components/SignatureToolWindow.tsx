@@ -53,7 +53,7 @@ function SignatureToolWindow(props: { onClose: () => void }) {
 
     return (
         <Window
-            onClose={onClose} height={390} width={320}
+            onClose={onClose} height={390} width={430}
             minConstraints={[270, 230]}
             cancel=".signatureTableDiv,.inputSearch,.searchSigButton">
 
