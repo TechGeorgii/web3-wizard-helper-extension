@@ -3,12 +3,9 @@
   "name": "Web3 Wizard Helper",
   "description": "Extension to simplify querying and data hacking on Dune Analytics",
   "options_page": "options.html",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "permissions": [
     "storage"
-  ],
-  "host_permissions": [
-    "https://www.4byte.directory/*"
   ],
   "background": {
     "service_worker": "background.js"
