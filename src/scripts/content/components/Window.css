@@ -1,4 +1,4 @@
-.react-resizable-handle {
+#DuneExtResizable .react-resizable-handle {
     z-index: 100000;
     position: absolute;
     width: 20px;
@@ -29,7 +29,7 @@
     height: calc(100% - 40px);
 }
 
-.react-resizable {
+#DuneExtResizable .react-resizable {
     left: 100px;
     top: 100px;
     background-color: white;
