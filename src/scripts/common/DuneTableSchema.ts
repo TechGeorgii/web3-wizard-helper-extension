@@ -8,16 +8,19 @@ interface DuneTableColumn {
 
 class DuneTableSchema {
     tableName: string;
-    columns: DuneTableColumn[];
+    columns: DuneTableColumn[] | null = null;
+    error: string;
 
-    constructor(tableName: string, jsonData: any) {
+    constructor(tableName: string, jsonData: any, error = "") {
         this.tableName = tableName;
+        this.error = error;
 
-        this.columns = (jsonData.data.arrakis_schemas as DuneTableColumn[])
-            .map(obj => obj)
-            // full_name is the same as table name. Sometimes for tables like "tokens.erc20" some columns come
-            // from different tables. So we need to leave only cols related to current table.
-            .filter(col => (typeof col.full_name == "string" ? col.full_name.toLowerCase() : "") == tableName.toLowerCase());
+        if (jsonData && jsonData.data && jsonData.data.arrakis_schemas)
+            this.columns = (jsonData.data.arrakis_schemas as DuneTableColumn[])
+                .map(obj => obj)
+                // full_name is the same as table name. Sometimes for tables like "tokens.erc20" some columns come
+                // from different tables. So we need to leave only cols related to current table.
+                .filter(col => (typeof col.full_name == "string" ? col.full_name.toLowerCase() : "") == tableName.toLowerCase());
     }
 }
 

@@ -6,7 +6,7 @@ import { DuneTablePreview } from '../../common/DuneTablePreview';
 
 function PreviewWindow(props: { onClose: () => void, preview: DuneTablePreview }) {
     const { onClose } = props;
-    const { columns, data, tableName, error } = props.preview;
+    const { columns, data, tableName, error, loading } = props.preview;
 
     return (
         <Window onClose={onClose}
@@ -44,12 +44,14 @@ function PreviewWindow(props: { onClose: () => void, preview: DuneTablePreview }
                         </div>
 
                         <div className='bottomDiv'>
-                            <div className='rowsCntDiv'>10 rows</div>
+                            <div className='rowsCntDiv'>{data.length} rows</div>
                         </div>
                     </>
                 }
 
-                {!(columns && data) && <div className="messageDiv">{error ? "Cannot load preview. Network error or table does not exist" : "Loading..."}</div>}
+                {!(columns && data) && <div className="messageDiv">
+                    {loading ? "Loading..." : (error ?? "Cannot load preview. Network error or table does not exist")}
+                </div>}
             </div>
         </Window >
     );

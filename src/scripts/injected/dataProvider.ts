@@ -11,7 +11,7 @@ class DataProvider {
     async getData(operation: TableOperation): Promise<any> {
         const key = operation.operationName + "####" + operation.lexem;
 
-        let release: MutexInterface.Releaser | null
+        let release: MutexInterface.Releaser | null;
         release = await this.mutex.acquire();
         try {
             const cached = this.dataMap.get(key);
@@ -64,6 +64,7 @@ class DataProvider {
         }
         catch (err) {
             logger.error(`failed operation ${operation.operationName} for "${operation.lexem}": ${err}`);
+            throw `Error loading ${operation.lexem}: ${err}`;
         }
         finally {
             this.activeOperations.delete(key);

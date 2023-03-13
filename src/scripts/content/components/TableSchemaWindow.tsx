@@ -20,9 +20,19 @@ function TableSchemaWindow(props: { table: DuneTableSchema, onClose: () => void 
                                 </span> */}
                 </h3>
 
-                <ul className='schemaUL'>
-                    {table.columns.map(col => <SchemaListItem key={col.id} column={col} />)}
-                </ul>
+                {
+                    table.columns &&
+                    <ul className='schemaUL'>
+                        {table.columns.map(col => <SchemaListItem key={col.id} column={col} />)}
+                    </ul>
+                }
+
+                {
+                    !table.columns &&
+                    <div style={{ textAlign: "center" }}>
+                        {table.error ? table.error : "Error loading schema. Probably table doesn't exist"}
+                    </div>
+                }
             </div>
         </Window>
     );

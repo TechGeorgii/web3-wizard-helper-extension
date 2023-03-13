@@ -2,30 +2,30 @@ import jwt_decode from "jwt-decode";
 import { logger } from "../common/logger";
 
 export async function executeGraphQl(body: string, getExecution = false): Promise<any> {
-    await ensureTokenUpdated();
-
-    const tokenData = (window as any).DuneHelperExtTokenData;
-    const resp = await fetch(
-        getExecution ? "https://app-api.dune.com/v1/graphql" : "https://core-hsr.dune.com/v1/graphql",
-        {
-            "headers": {
-                "accept": "*/*",
-                "authorization": `Bearer ${tokenData.token}`,
-                "content-type": "application/json",
-                "sec-fetch-dest": "empty",
-                "sec-fetch-mode": "cors",
-                "sec-fetch-site": "same-site",
-                "x-dune-access-token": tokenData.accessToken,
-                //"x-hasura-api-key": ""  // this is to request app-api.dune.com, but put here for generalization.
-            },
-            "referrer": "https://dune.com/",
-            "referrerPolicy": "strict-origin-when-cross-origin",
-            "body": body,
-            "method": "POST",
-            "mode": "cors",
-            "credentials": getExecution ? "same-origin" : "include"
-        });
-    return resp.json();
+    return ensureTokenUpdated()
+        .then((_) => {
+            const tokenData = (window as any).DuneHelperExtTokenData;
+            return fetch(
+                getExecution ? "https://app-api.dune.com/v1/graphql" : "https://core-hsr.dune.com/v1/graphql",
+                {
+                    "headers": {
+                        "accept": "*/*",
+                        "authorization": `Bearer ${tokenData.token}`,
+                        "content-type": "application/json",
+                        "sec-fetch-dest": "empty",
+                        "sec-fetch-mode": "cors",
+                        "sec-fetch-site": "same-site",
+                        "x-dune-access-token": tokenData.accessToken
+                    },
+                    "referrer": "https://dune.com/",
+                    "referrerPolicy": "strict-origin-when-cross-origin",
+                    "body": body,
+                    "method": "POST",
+                    "mode": "cors",
+                    "credentials": getExecution ? "same-origin" : "include"
+                });
+        })
+        .then((resp) => resp.json());
 }
 
 async function ensureTokenUpdated(): Promise<void> {
@@ -55,13 +55,21 @@ async function ensureTokenUpdated(): Promise<void> {
             "mode": "cors",
             "credentials": "include"
         })
-            .then(resp => resp.json())
+            .then(resp => {
+                if (!resp.ok) {
+                    return new Promise(async function (_, reject) {
+                        reject(await resp.text());
+                    });
+                }
+                return resp.json();
+            })
             .then(data => {
                 (window as any).DuneHelperExtTokenData = data;
                 logger.log("success getting session token")
             })
             .catch(err => {
-                logger.error("error getting token: " + err)
+                logger.error("error getting session token: " + err.toString());
+                throw "cannot authenticate. Probably you need to log in";
             })
 
         : Promise.resolve()

@@ -39,21 +39,28 @@ window.addEventListener("message", (event) => {
                             tableName: lex
                         });
                     })
-                    .catch((err) => logger.error(err));
+                    .catch((err) => {
+                        window.postMessage({
+                            evt: "schemaReceived",
+                            error: err,
+                            tableName: lex
+                        });;
+                    });
 
                 break;
 
             case "preview":
-                const sendPreviewReceived = (tableName: string, data: any = null, error = false) => {
+                const sendPreviewReceived = (tableName: string, data: any = null, loading = false, error = "") => {
                     window.postMessage({
                         evt: "previewReceived",
                         tableName: tableName,
                         rawData: data,
-                        error: !error ? null : error
+                        error: error,
+                        loading: loading
                     });
                 };
 
-                sendPreviewReceived(lex);
+                sendPreviewReceived(lex, null, true);
 
                 const tablePreviewOperation = new GetTablePreview(lex);
 
@@ -64,7 +71,7 @@ window.addEventListener("message", (event) => {
                     })
                     .catch((err) => {
                         logger.error(err);
-                        sendPreviewReceived(lex, null, true);
+                        sendPreviewReceived(lex, null, false, err);
                     });
 
                 break;

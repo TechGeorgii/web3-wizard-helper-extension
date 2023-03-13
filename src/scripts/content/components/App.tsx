@@ -20,15 +20,15 @@ function App() {
 
         switch (event.data.evt) {
             case "schemaReceived":
-                if (event.data.rawData && event.data.tableName) {
-                    const duneTable = new DuneTableSchema(event.data.tableName, event.data.rawData);
+                if (event.data.tableName) {
+                    const duneTable = new DuneTableSchema(event.data.tableName, event.data.rawData, event.data.error);
                     setTableSchema(duneTable);
                 }
                 break;
 
             case "previewReceived":
                 if (event.data.tableName) {
-                    const preview = new DuneTablePreview(event.data.tableName, event.data.rawData, event.data.error != null);
+                    const preview = new DuneTablePreview(event.data.tableName, event.data.rawData, event.data.error, event.data.loading);
                     setTablePreview(preview);
                 }
                 break;
