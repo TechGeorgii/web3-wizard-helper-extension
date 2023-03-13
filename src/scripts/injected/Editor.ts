@@ -28,7 +28,8 @@ class Editor {
                 exec: () => {
                     window.postMessage({ evt: "cmd", command: "schema" });
                 },
-                bindKey: { win: "ctrl-s", mac: "cmd-s" }
+                bindKey: { win: "ctrl-s", mac: "cmd-s" },
+                readOnly: true
             });
 
             this.ace.commands.addCommand({
@@ -36,7 +37,8 @@ class Editor {
                 exec: () => {
                     window.postMessage({ evt: "cmd", command: "preview" });
                 },
-                bindKey: { win: "ctrl-p", mac: "cmd-p" }
+                bindKey: { win: "ctrl-p", mac: "cmd-p" },
+                readOnly: true
             });
 
             this.ace.session.selection.on('change', () => {
