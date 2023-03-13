@@ -1,5 +1,7 @@
-import { parser } from "./parser";
-import { FindDecodedTableDetail, FindTableDetail } from "./TableOperations";
+import { Parser } from "./Parser";
+import { FindDecodedTableDetail } from "./DuneOperations/FindDecodedTableDetail";
+import { FindTableDetail } from "./DuneOperations/FindTableDetail";
+
 
 const decoded = [
     ["aavegotchi_polygon.aavegotchi_diamond_call_aavegotchiClaimTime",
@@ -40,11 +42,20 @@ const spells_no_blockchain = [
     ["tokens.erc20", { ns: "tokens", bc: "", tn: "erc20", cat: "abstraction" }]
 ];
 
+const community = [
+    ["reservoir.sales", { ns: "reservoir", bc: "", tn: "sales", cat: "third_party_data" }],
+    ["reservoiR.saleS", { ns: "reservoiR", bc: "", tn: "saleS", cat: "third_party_data" }],
+    ["cowswap.raw_app_data", { ns: "cowswap", bc: "", tn: "raw_app_data", cat: "third_party_data" }],
+];
+
+
 const errors = [
     "", "..", "a..b", "a.", ".b", "a", "_a.b", "a.b_", "a__b.b", "a.b__b"
 ];
 
 test("Test decoded tables (positive)", () => {
+    const parser = new Parser();
+
     for (let tc of decoded) {
         const lex = tc[0] as string;
         const exp = tc[1] as { ns: string, bc: string, cn: string, mt: string, abi: string };
@@ -60,8 +71,11 @@ test("Test decoded tables (positive)", () => {
     }
 });
 
-test("Test raw and spell tables (positive)", () => {
-    for (let tc of [...raw, ...spells, ...spells_no_blockchain]) {
+test("Test raw, spell, community tables (positive)", () => {
+    const parser = new Parser();
+    parser.setNamespacesCategory(["reservoir", "cowswap"], "third_party_data");
+
+    for (let tc of [...raw, ...spells, ...spells_no_blockchain, ...community]) {
         const lex = tc[0] as string;
         const exp = tc[1] as { ns: string, bc: string, tn: string, cat: string };
         const res = parser.parseLexem(lex);
@@ -76,6 +90,8 @@ test("Test raw and spell tables (positive)", () => {
 });
 
 test("Test errors", () => {
+    const parser = new Parser();
+
     for (let lex of errors) {
         const actual = parser.parseLexem(lex);
         expect(actual).toBeNull();

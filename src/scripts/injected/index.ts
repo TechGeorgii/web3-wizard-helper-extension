@@ -2,8 +2,8 @@ import { logger } from "../common/logger";
 import { dataProvider } from "./dataProvider";
 import { Editor } from "./Editor";
 import { parser } from "./parser";
-import { GetTablePreview } from "./TableOperations"
-import { DuneTablePreview } from "../common/DuneTablePreview";
+import { GetTablePreview } from "./DuneOperations/GetTablePreview"
+import { ListThirdParties } from "./DuneOperations/ListThirdParties";
 
 const editor = new Editor();
 editor.setListener((_, lex) => {
@@ -12,6 +12,18 @@ editor.setListener((_, lex) => {
         lexem: parser.parseLexem(lex) == null ? "" : lex
     });
 });
+
+dataProvider.getData(new ListThirdParties())
+    .then(res => {
+        if (res.data && res.data.arrakis_schemas) {
+            logger.log("third_party_data category namespaces received");
+            parser.setNamespacesCategory(res.data.arrakis_schemas.map((el: any) => el.namespace), "third_party_data");
+        }
+        else
+            logger.error("cannot set third_party_data category namespaces: no data returned");
+    })
+    .catch(err => logger.error("cannot set third_party_data category namespaces: " + err));
+;
 
 //var port = chrome.runtime.connect();
 window.addEventListener("message", (event) => {

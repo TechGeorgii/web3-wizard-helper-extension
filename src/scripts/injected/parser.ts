@@ -1,7 +1,9 @@
-import { FindDecodedTableDetail, FindTableDetail } from "./TableOperations";
+import { FindDecodedTableDetail } from "./DuneOperations/FindDecodedTableDetail";
+import { FindTableDetail } from "./DuneOperations/FindTableDetail";
 
 class Parser {
     rawTablesMap: Map<string, Set<string>>;
+    namespacesCategory = new Map<string, string>();
 
     constructor() {
         const ethCommonTables = ["blocks", "creation_traces", "logs", "logs_decoded", "traces", "traces_decoded", "transactions"];
@@ -68,7 +70,7 @@ class Parser {
             // it is spell like prices.usd, dao.proposals, gas.fees that contain column 'blockchain' in them.
 
             const res = new FindTableDetail(lexem);
-            res.category = "abstraction";
+            res.category = this.namespacesCategory.get(dotSplitted[0].toLowerCase()) ?? "abstraction";
             res.namespace = dotSplitted[0];
             res.tableName = dotSplitted[1];
             return res;
@@ -110,7 +112,12 @@ class Parser {
 
         return returnDetail();
     }
+
+    setNamespacesCategory(namespaces: string[], category: string) {
+        for (var ns of namespaces)
+            this.namespacesCategory.set(ns.toLowerCase(), category);
+    }
 }
 
 const parser = new Parser();
-export { parser }
+export { parser, Parser };

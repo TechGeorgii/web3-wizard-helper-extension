@@ -1,4 +1,6 @@
-import { TableOperation, ExecutionId, GetExecution } from "./TableOperations";
+import { TableOperation } from "./DuneOperations/TableOperation";
+import { ExecutionId } from "./DuneOperations/ExecutionId";
+import { GetExecution } from "./DuneOperations/GetExecution";
 import { logger } from "../common/logger";
 import { executeGraphQl } from "./backend";
 import { Mutex, MutexInterface } from 'async-mutex';
@@ -39,7 +41,7 @@ class DataProvider {
                 const executionId = operation.getExecutionId(resExec);
                 logger.info(`executionId received for ${key}`);
 
-                const tries = 10;
+                const tries = 15;
                 for (let i = 0; i < tries; i++) {
                     await this.wait(1000);
                     logger.info(`checking for completion ${key} (${i + 1}/${tries})`);
