@@ -15,7 +15,6 @@ function Window(props: {
 
     return (
         <span id="DuneExtResizable">
-        // cancel – append what's passed here to window handle
             <Draggable
                 cancel={".react-resizable-handle" + ((props.cancel ?? "").length != 0 ? "," + props.cancel : "")}
                 onMouseDown={function (evt) {
