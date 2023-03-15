@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { CommandToolbar } from "../CommandToolbar";
 import { DuneTableSchema } from "../../common/DuneTableSchema";
 import { DuneTablePreview } from "../../common/DuneTablePreview";
 import TableSchemaWindow from "./TableSchemaWindow";
 import SignatureToolWindow from "./SignatureToolWindow"
 import PreviewWindow from "./PreviewWindow";
+import { logger } from "../../common/logger";
 
 function App() {
     const toolbar = useRef<CommandToolbar>(new CommandToolbar());
@@ -47,6 +50,17 @@ function App() {
 
     };
 
+    const handleFullScreenChange = function (evt: any) {
+        const hideAllWindows = () => {
+            setTableSchema(null);
+            setTablePreview(null);
+            setShowSignatureToolWindow(false);
+        };
+        if (!document.fullscreenElement) {
+            hideAllWindows();
+        }
+    };
+
     const initToolbar = function () {
         toolbar.current.addCommand("Schema (ctrl-s)", "schema");
         toolbar.current.addCommand("Preview (ctrl-p)", "preview");
@@ -57,19 +71,47 @@ function App() {
     useEffect(() => {
         initToolbar();
         window.addEventListener("message", handleMessage);
+        addEventListener("fullscreenchange", handleFullScreenChange);
 
         return () => {
             window.removeEventListener('message', handleMessage);
+            removeEventListener("fullscreenchange", handleFullScreenChange);
         };
     }, []);
 
+
+    let div = document.getElementById("wiz-helper-fs-window");
+    if (!div) {
+        const editor = document.getElementById("code");
+        if (editor == null) {
+            return <></>;
+        }
+
+        div = document.createElement("div");
+        div.id = "wiz-helper-fs-window";
+        editor.insertAdjacentElement("afterend", div);
+    }
+
+    // let's render portal into div element.
+
     return (
         <>
-            {tableSchema && <TableSchemaWindow table={tableSchema} onClose={() => setTableSchema(null)} />}
-            {tablePreview && <PreviewWindow preview={tablePreview} onClose={() => setTablePreview(null)} />}
-            {showSignatureToolWindow && <SignatureToolWindow onClose={() => setShowSignatureToolWindow(false)} />}
-        </>
-    );
+            {document.fullscreenElement == null &&
+                <>
+                    {tableSchema && <TableSchemaWindow table={tableSchema} onClose={() => setTableSchema(null)} />}
+                    {tablePreview && <PreviewWindow preview={tablePreview} onClose={() => setTablePreview(null)} />}
+                    {showSignatureToolWindow && <SignatureToolWindow onClose={() => setShowSignatureToolWindow(false)} />}
+                </>}
+
+            {document.fullscreenElement != null &&
+                createPortal(
+                    <>
+                        {tableSchema && <TableSchemaWindow table={tableSchema} onClose={() => setTableSchema(null)} />}
+                        {tablePreview && <PreviewWindow preview={tablePreview} onClose={() => setTablePreview(null)} />}
+                        {showSignatureToolWindow && <SignatureToolWindow onClose={() => setShowSignatureToolWindow(false)} />}
+                    </>,
+                    div)}
+        </>);
 }
 
 export default App;
