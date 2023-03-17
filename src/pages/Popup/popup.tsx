@@ -89,7 +89,7 @@ function Popup(props: { extEnabled: boolean }) {
             <a target="_blank" href="https://twitter.com/TechGeorgii"> <img className="socialImg" src="icons/twitter.png" /></a>
           </div>
           <div>
-            <a target="_blank" href="https://github.com/TechGeorgii"> <img className="socialImg" src="icons/github.png" /></a>
+            <a target="_blank" href="https://github.com/TechGeorgii/web3-wizard-helper-extension"> <img className="socialImg" src="icons/github.png" /></a>
           </div>
         </div>
       </div>
