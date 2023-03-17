@@ -2,7 +2,7 @@
 
 gm Web3 Data Wizards 🧙🧙🧙 
 
-This extension is for you to speed up querying on Dune Analytics.
+This extension is for you to speed up querying on [Dune Analytics](https://dune.com/).
 
 It helps you to get Dune tables preview and structure in a second, WITHOUT:
 - Navigating in the data explorer (left panel).
