@@ -86,4 +86,4 @@ After you made changes:
 If you want to contribute, you can:
 - Open an issue
 - Make a PR. When I have time, I'll verify the changes and push them into Chrome Web Store
-- Reach me on <a href="https://twitter.com/TechGeorgii" target="_blank"><img src="https://raw.githubusercontent.com/TechGeorgii/github-resources/main/twitter.png"></a> to discuss anything
+- Reach me on <a href="https://twitter.com/TechGeorgii" target="_blank"><img src="https://raw.githubusercontent.com/TechGeorgii/github-resources/main/twitter-logo.png"></a> to discuss anything
