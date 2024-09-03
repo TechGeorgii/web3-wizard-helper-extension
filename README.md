@@ -1,5 +1,17 @@
 # Web3 Wizard Helper Extension for Dune Analytics
 
+**IMPORTANT NOTE**
+
+The extension does not work anymore due to breaking changes in Dune API.
+Unfortunately I don't have enough time and motivation to support it since very few people were using it and I don't make anything from it nor use Dune anymore.
+It is open source so you can fix it yourself if necessary. I'll be happy to publish.
+
+I am open for any kind of work or collaboration – please contact me by email techgeorgii at gmail.
+
+Thank you!
+
+**IMPORTANT NOTE ENDS**
+
 gm Web3 Data Wizards 🧙🧙🧙 
 
 This extension is for you to speed up querying on [Dune Analytics](https://dune.com/).
